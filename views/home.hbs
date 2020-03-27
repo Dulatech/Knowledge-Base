@@ -1,5 +1,73 @@
 {{>header}}
+        <div id = "container">
+            <div id ="userDiv">
+                <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face" height="75" width="75">
+                <h3 id ="userName">{{user.firstname}} {{user.lastname}}</h3>
+                <p id ="userAbout">{{user.about}}</p>
+                <a id ="userPosts" href="/">Posts</a>           <p id ="postNum">{{discposts.posts}}</p> <br>
+                <a id ="userMsg" href="/">Messages</a>          <p id ="msgNum">0</p> <br>
+                <p id ="userLikes">Likes</p>                    <p id ="likeNum">0</p> <br>
+                <a id ="edit" href="/">Edit Profile</a>
+            </div>
 
-<div class="dirform">
-    <h1>Home</h1>
-</div>
+            <div id="rightDiv">
+                <div id ="formDiv">
+                    <h2 id ="formHead">Whats your question today?</h2>
+                    <form id ="formForm" action="/discussion/add" method="POST">
+                        <input id ="formSub" name="subject" placeholder="Subject" type="text" required>
+                        <br>
+                        <textarea id ="formBod" name="body" placeholder="Explain in detail ..." type="text" required></textarea>
+                        <br>
+                        <select id ="formTopic" name="topic" required>
+                            <option value="" disabled selected>Topic</option>
+                            <option value="php">php</option>
+                            <option value="nodejs">nodejs</option>
+                            <option value="java">java</option>
+                            <option value="sql">sql</option>
+                            <option value="zend">zend</option>
+                          </select>
+                        <button id ="formButton">Post to Timeline</button>
+                    </form>
+                </div>
+
+                <div id ="discDiv">
+                    <form id ="topicForm">
+                        <p id ="topicLab">Search by Topic</p>
+                        <select id ="topicSel" name="topic">
+                            <option value="" disabled selected>Topic</option>
+                            <option value="php">php</option>
+                            <option value="nodejs">nodejs</option>
+                            <option value="java">java</option>
+                            <option value="sql">sql</option>
+                            <option value="zend">zend</option>
+                          </select>
+                        <button id ="topicBtn">Go -></button>
+                    </form>
+                    <p>Latest discussion</p>
+                    <ul id ="discList">
+                        {{#each disc}}
+                        <li id ="discListItem">
+                            <div id ="disc">
+                                <img id ="friendImg" src="{{this.imageurl}}" alt="Smiley face" height="75" width="75">
+                                <div id ="discInfo">
+                                    <p id ="discSub">{{this.title}}</p>                <p id ="discTopic">{{this.topic}}</p>
+                                    <p id ="discBody">{{this.body}}</p>
+                                    <p id ="discDate">{{this.re_format}}</p>           <a id ="discReplies" href="/">0 replies</a>
+                                </div>
+                            </div>
+                        </li> 
+                        <br><br>
+                        {{/each}}
+                         
+                    </ul>
+                    <div id= "navDiv">
+                        <form id ="prevForm">
+                            <button id ="prevBtn"><- Prevous</button>
+                        </form>
+                        <form id ="nextForm">
+                            <button id ="nextBtn">Next -></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>  

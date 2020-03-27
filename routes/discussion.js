@@ -1,10 +1,11 @@
 const express = require('express');
-// const artistController = require('../controllers/ArtistController');
-// const loginController = require('../controllers/LoginController');
+const discussionController = require('../controllers/DiscussionController');
 const router = express.Router();
 
-// router.post('/login', loginController.transport);
 
+router.get('/discussion', discussionController.loadHome);
+
+router.post('/discussion/add', discussionController.addDiscussion);
 // router.post('/logout', artistController.transport);
 
 // router.get('/artists', artistController.getAllArtists);

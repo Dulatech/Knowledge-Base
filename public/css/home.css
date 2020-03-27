@@ -1,0 +1,302 @@
+body{
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Header */
+
+header{
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    margin-bottom: 5px;
+    width: 850px;
+    margin: 0 auto;
+}
+
+#headerDiv{
+    
+    display: inline;
+    
+}
+
+#searchForm{
+    position: absolute;
+    display: inline;
+    width: 20%;
+}
+
+#homeLogo{
+    margin: 0;
+    padding: 0;
+    display: inline;
+    margin-right: 30px;
+}
+
+#logoutForm{
+    float: right;
+}
+
+#logoutBtn{
+    margin-right: 10px;
+    border: 0;
+    background-color: rgb(43, 152, 255);
+    height: 30px;
+    width: 80px;
+    text-align: left;
+    color: white;
+}
+
+#searchInput{
+    border: 0;
+    background-color: rgb(230, 227, 227);
+    margin: 0;
+    padding: 0;
+    padding-left: 30px;
+    height: 40px;
+    width: 100%;
+}
+
+#searchIMG{
+    position: absolute;
+    width: 15px;
+    bottom: 12px;
+    left: 10px;
+}
+
+/* Header */
+
+
+#container{
+    width: 850px;
+    display:table;
+    margin: 0 auto;
+}
+
+/* User */
+
+#userDiv{
+    display:table-cell;
+    width: 30%;
+    padding-right: 5em;
+}
+
+#userPic{
+    margin-top: 80px; 
+    margin-left: auto;
+  margin-right: auto;
+  display: block; 
+  border-radius: 50%;
+}
+
+#userName{
+    text-align: center; 
+}
+#userAbout{
+    font-size: 9pt;
+    text-align: center; 
+}
+
+#userPosts{
+    font-size: 9pt;
+    margin-top: 30px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+#postNum{
+    font-size: 9pt;
+    display: inline;
+}
+
+#userMsg{
+    font-size: 9pt;
+    margin-left: 10px;
+}
+
+#msgNum{
+    font-size: 9pt;
+    display: inline;
+}
+
+#userLikes{
+    font-size: 9pt;
+    margin-left: 10px;
+    display: inline;
+}
+
+#likeNum{
+    font-size: 9pt;
+    display: inline;
+}
+
+#edit{
+    font-size: 9pt;
+    display: inline-block;
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+
+/* User */
+
+/* Discussion */
+
+#rightDiv{
+    vertical-align: top;
+    margin: 0 auto;
+    display:table-cell;
+    margin-top: 0px;
+    width:60%;
+}
+
+#formSub{
+    margin-bottom: 10px;
+    width: 258px;
+}
+
+#formBod{
+    margin-bottom: 10px;
+    width: 250px;
+    padding:0 5px 50px;
+}
+
+#formTopic{
+    background-color: rgb(255, 255, 255);
+    height: 30px;
+    text-align: left;
+    border: 1px solid;
+    border-color: rgb(43, 152, 255);
+    color: rgb(43, 152, 255);
+    height: 20px;
+    width: 150px;
+}
+
+#formButton{
+    background-color: rgb(255, 255, 255);
+    height: 30px;
+    text-align: left;
+    border: 1px solid;
+    border-color: rgb(43, 152, 255);
+    color: rgb(43, 152, 255);
+    height: 20px;
+}
+
+#topicLab{
+    font-size: 10pt;
+    margin-top: 30px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+#topicBtn{
+    background-color: rgb(255, 255, 255);
+    height: 30px;
+    text-align: left;
+    border: 1px solid;
+    border-color: rgb(43, 152, 255);
+    color: rgb(43, 152, 255);
+    height: 20px;
+}
+
+#topicSel{
+    background-color: rgb(255, 255, 255);
+    height: 30px;
+    text-align: left;
+    border: 1px solid;
+    border-color: rgb(43, 152, 255);
+    color: rgb(43, 152, 255);
+    height: 20px;
+    width: 150px;
+}
+
+#discList{
+    list-style: none;
+    padding:0;
+}
+
+#disc{
+    display: table;
+}
+
+#friendImg{
+    border-radius: 50%;
+    float: left;
+}
+
+#discInfo{
+    float: right;
+    width: 400px;
+}
+
+#discSub{
+    margin-left: 20px;
+    display: inline;
+}
+#discTopic{
+    margin: 0;
+    float: right;
+    display: inline;
+    background-color: rgb(255, 255, 255);
+    text-align: left;
+    border: 1px solid;
+    border-color: rgb(43, 152, 255);
+    color: rgb(43, 152, 255);
+}
+
+#discBody{
+    margin-left: 40px;
+    font-size: 10pt;
+}
+
+#discDate{
+    margin-left: 40px;
+    font-size: 9pt;
+    display: inline;
+}
+ #discReplies{
+    margin-left: 170px;
+    font-size: 10pt;
+ }
+
+ #navDiv{
+     margin-top: 40px;
+     width: 450px;
+ }
+
+ #prevForm{
+     display: inline;
+ }
+
+ #prevBtn{
+    background-color: rgb(255, 255, 255);
+    height: 30px;
+    text-align: left;
+    border: 1px solid;
+    border-color: rgb(43, 152, 255);
+    color: rgb(43, 152, 255);
+    height: 20px;
+ }
+
+ #nextForm{
+    display: inline;
+    
+}
+
+#nextBtn{
+    background-color: rgb(255, 255, 255);
+    height: 30px;
+    text-align: left;
+    border: 1px solid;
+    border-color: rgb(43, 152, 255);
+    color: rgb(43, 152, 255);
+    height: 20px;
+    width: 80px;
+    text-align: right;
+    float: right;
+}
+
+
+
+
+
+/* Discussion */

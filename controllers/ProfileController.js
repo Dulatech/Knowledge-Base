@@ -1,3 +1,6 @@
-exports.doSmth = (req, res, next) => {
-    
- };
+let userModel = require('../models/userData');
+
+exports.l = async (req, res, next) => {
+
+
+};

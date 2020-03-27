@@ -17,6 +17,7 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
+
 app.use(bodyParser.urlencoded({
   extended: false
 })) 
@@ -36,7 +37,7 @@ let discussionRoutes = require('./routes/discussion');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
-  res.render('home', {
+  res.render('login', {
   });
 });
 
