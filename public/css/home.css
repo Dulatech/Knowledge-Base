@@ -37,7 +37,7 @@ header{
 }
 
 #logoutBtn{
-    margin-right: 10px;
+    margin-right: 140px;
     border: 0;
     background-color: rgb(43, 152, 255);
     height: 30px;
@@ -225,7 +225,7 @@ header{
 
 #discInfo{
     float: right;
-    width: 400px;
+    width: 365px;
 }
 
 #discSub{
@@ -241,6 +241,8 @@ header{
     border: 1px solid;
     border-color: rgb(43, 152, 255);
     color: rgb(43, 152, 255);
+    margin-right: 30px;
+    height: 20px;
 }
 
 #discBody{
