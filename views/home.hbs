@@ -1,7 +1,7 @@
 {{>header}}
         <div id = "container">
             <div id ="userDiv">
-                <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face" height="75" width="75">
+                <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face">
                 <h3 id ="userName">{{user.firstname}} {{user.lastname}}</h3>
                 <p id ="userAbout">{{user.about}}</p>
                 <a id ="userPosts" href="/">Posts</a>           <p id ="postNum">{{discposts.posts}}</p> <br>
@@ -48,7 +48,7 @@
                         {{#each disc}}
                         <li id ="discListItem">
                             <div id ="disc">
-                                <img id ="friendImg" src="{{this.imageurl}}" alt="Smiley face" height="75" width="75">
+                                <img id ="friendImg" src="{{this.imageurl}}" alt="Smiley face">
                                 <div id ="discInfo">
                                     <p id ="discSub">{{this.title}}</p>                <p id ="discTopic">{{this.topic}}</p>
                                     <p id ="discBody">{{this.body}}</p>
@@ -61,12 +61,17 @@
                          
                     </ul>
                     <div id= "navDiv">
-                        <form id ="prevForm">
+                        {{#if truePrev}}
+                        <form id ="prevForm" action="/discussion/prevPage" method="POST">
                             <button id ="prevBtn"><- Prevous</button>
                         </form>
-                        <form id ="nextForm">
+                        {{/if}}
+                        
+                        {{#if trueNext}}
+                        <form id ="nextForm" action="/discussion/nextPage" method="POST">
                             <button id ="nextBtn">Next -></button>
                         </form>
+                        {{/if}}
                     </div>
                 </div>
             </div>

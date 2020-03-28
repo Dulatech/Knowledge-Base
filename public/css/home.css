@@ -13,6 +13,10 @@ header{
     margin: 0 auto;
 }
 
+#logoForm{
+    display: inline;
+}
+
 #headerDiv{
     
     display: inline;
@@ -30,6 +34,16 @@ header{
     padding: 0;
     display: inline;
     margin-right: 30px;
+    height: 40px;
+    width: 40px;
+    font-size: 30pt;
+    font-weight: bolder;
+    border: 0;
+    background-color: white;
+}
+
+#logospan{
+    color: rgb(43, 152, 255);
 }
 
 #logoutForm{
@@ -86,6 +100,8 @@ header{
   margin-right: auto;
   display: block; 
   border-radius: 50%;
+  height: 75px;
+  width: 75px;
 }
 
 #userName{
@@ -219,6 +235,8 @@ header{
 }
 
 #friendImg{
+    height: 75px;
+    width: 75px;
     border-radius: 50%;
     float: left;
 }
@@ -261,7 +279,6 @@ header{
  }
 
  #navDiv{
-     margin-top: 40px;
      width: 450px;
  }
 

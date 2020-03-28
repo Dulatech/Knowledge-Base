@@ -1,8 +1,8 @@
 let db = require('../util/database');
 
 
-function getAllDiscussions() {
-    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted, \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id order by id DESC');
+function getAllDiscussions(limit, offset) {
+    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted, \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id order by id DESC LIMIT ' + limit + ' OFFSET ' + offset);
 }
 
 // Add a single individual to the database
@@ -12,11 +12,16 @@ function addDisc(data) {
 }
 
 function getUserPostNum(id) {
-    return db.query('Select count(title) as posts from discussion where userid = ' + id);
+    return db.query('Select count(id) as posts from discussion where userid = ' + id);
+}
+
+function getPostNum(id) {
+    return db.query('Select count(id) as posts from discussion');
 }
 
 module.exports = {
     add: addDisc,
     getall: getAllDiscussions,
-    getposts: getUserPostNum
+    getposts: getUserPostNum,
+    getallposts: getPostNum
 }

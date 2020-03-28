@@ -1,11 +1,13 @@
 <header>
-            <img id ="homeLogo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAx4Dk751kvWGR-Gt9qnw5j6AalmThr4N4j7xAWRsDsayu-cXX" alt="Smiley face" height="40px" width="50">
+            <form id = "logoForm">
+            <button id ="homeLogo" type="submit" formaction="/discussion">k<span id= 'logospan'>b</span></button>
+            </form>
             <div id = "headerDiv">
                 <form id ="searchForm">
                     <input id ="searchInput" name="search" placeholder="Search" type="text">
                     <img id="searchIMG" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/945px-Vector_search_icon.svg.png" />
                 </form>
-                <form id ="logoutForm">
+                <form id ="logoutForm" formaction="/logout" method ="POST">
                     <button id ="logoutBtn" >Logout</button>
                 </form>
             </div>
