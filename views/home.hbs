@@ -1,7 +1,9 @@
 {{>header}}
         <div id = "container">
             <div id ="userDiv">
-                <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face">
+                <a href="/">
+                    <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face">
+                </a>
                 <h3 id ="userName">{{user.firstname}} {{user.lastname}}</h3>
                 <p id ="userAbout">{{user.about}}</p>
                 <a id ="userPosts" href="/">Posts</a>           <p id ="postNum">{{discposts.posts}}</p> <br>
@@ -48,11 +50,36 @@
                         {{#each disc}}
                         <li id ="discListItem">
                             <div id ="disc">
-                                <img id ="friendImg" src="{{this.imageurl}}" alt="Smiley face">
+                                <a href="/">
+                                    <img id ="friendImg" src="{{this.imageurl}}" alt="Smiley face">
+                                </a>
                                 <div id ="discInfo">
                                     <p id ="discSub">{{this.title}}</p>                <p id ="discTopic">{{this.topic}}</p>
                                     <p id ="discBody">{{this.body}}</p>
-                                    <p id ="discDate">{{this.re_format}}</p>           <a id ="discReplies" href="/">0 replies</a>
+                                    <p id ="discDate">{{this.re_format}}</p>           <a id ="discReplies" href='javascript:;' onclick='show_replies(this)'>{{this.repliesnum}} replies</a>
+                                    <div id ="allReplies">
+                                        <ul id ="replyList">
+                                            {{#each replies}}
+                                            <li id ="replyListItem">
+                                                <div id ="reply">
+                                                    <a href="/">    
+                                                        <img id ="friendReplyImg" src="{{this.imageurl}}" alt="Smiley face">
+                                                    </a>
+                                                    <div id ="replyInfo">
+                                                         <p id ="replyBody">{{this.body}}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                             {{/each}}
+                                        </ul>
+                                        <div id = "newReplyDiv">
+                                            <form id ="replyForm" action="/discussion/addreply/{{this.id}}" method="POST">
+                                                <textarea id ="replyBod" name="body" placeholder="Add your reply ..." type="text" required></textarea>
+                                                <br>
+                                                <button id ="replyButton">Comment</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </li> 

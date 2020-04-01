@@ -12,6 +12,9 @@ router.post('/discussion/nextPage', discussionController.nextPage);
 router.post('/discussion/prevPage', discussionController.prevPage);
 
 router.get('/discussion/pager', discussionController.loadHomeByPage);
+
+router.post('/discussion/addreply/:id', discussionController.addDiscussionReply)
+
 // router.post('/logout', artistController.transport);
 
 // router.get('/artists', artistController.getAllArtists);
