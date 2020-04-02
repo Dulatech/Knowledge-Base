@@ -4,7 +4,7 @@ let discussionReplyModel = require('../models/discussionReplyData');
 
 exports.loadHome = async (req, res, next) => {
       let Users = await userModel.load(1);
-      let Disc = await discussionModel.getall(5, 0);
+      let Disc = await discussionModel.getall(5, 0, "");
       for(var i = 0; i < Disc.rows.length; i++){
           
         let DiscReply = await discussionReplyModel.allreplies(Disc.rows[i].id);
@@ -14,36 +14,50 @@ exports.loadHome = async (req, res, next) => {
       }
       console.log(Disc.rows);
       let DiscPosts = await discussionModel.getposts(req.session.u_id);
-      req.session.page = 0;
-
         res.render('home', {
             user: Users.rows[0],
             disc: Disc.rows,
             discposts: DiscPosts.rows[0],
             truePrev: false,
+            selectedtopic: "All",
             trueNext: true
          });
         
 };
 
 exports.loadHomeByPage = async (req, res, next) => {
+    var sTopic = req.session.topic;
+    if(sTopic == ""){
+        sTopic = "All";
+    }
     let Users = await userModel.load(1);
-    let Disc = await discussionModel.getall(5, req.session.page);
+    let Disc = await discussionModel.getall(5, req.session.page, req.session.topic);
     for(var i = 0; i < Disc.rows.length; i++){    
         let DiscReply = await discussionReplyModel.allreplies(Disc.rows[i].id);
         let DiscReplyNum = await discussionReplyModel.repliesnum(Disc.rows[i].id);
         Disc.rows[i]["replies"] = DiscReply.rows;
         Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
     }
+    console.log(Disc.rows);
     let DiscPosts = await discussionModel.getposts(req.session.u_id);
-    let AllPosts = await discussionModel.getallposts();
-    if(req.session.page <= 0){
+    let AllPosts = await discussionModel.getallposts(req.session.topic);
+    if (AllPosts.rows[0].posts <= 5) {
+        res.render('home', {
+            user: Users.rows[0],
+            disc: Disc.rows,
+            discposts: DiscPosts.rows[0],
+            truePrev: false,
+            trueNext: false,
+            selectedtopic: sTopic
+         });
+    }else if(req.session.page <= 0){
       res.render('home', {
           user: Users.rows[0],
           disc: Disc.rows,
           discposts: DiscPosts.rows[0],
           truePrev: false,
-          trueNext: true
+          trueNext: true,
+          selectedtopic: sTopic
        });
     } else if (req.session.page + 5 >= AllPosts.rows[0].posts){
       res.render('home', {
@@ -51,7 +65,8 @@ exports.loadHomeByPage = async (req, res, next) => {
           disc: Disc.rows,
           discposts: DiscPosts.rows[0],
           truePrev: true,
-          trueNext: false
+          trueNext: false,
+          selectedtopic: sTopic
        });
     } else {
       res.render('home', {
@@ -59,7 +74,8 @@ exports.loadHomeByPage = async (req, res, next) => {
           disc: Disc.rows,
           discposts: DiscPosts.rows[0],
           truePrev: true,
-          trueNext: true
+          trueNext: true,
+          selectedtopic: sTopic
        });
     }
  
@@ -106,4 +122,15 @@ exports.addDiscussionReply = async (req, res, next) => {
      let Discussion = await discussionReplyModel.addr(drObject);
     res.redirect(301, "/discussion/pager");
 
+};
+
+exports.searchByTopic = async (req, res, next) => {
+    let topic = req.body.topic;
+    if(topic == "all"){
+        topic = "";
+    }
+    req.session.topic = topic;
+    console.log(req.session.topic);
+    req.session.page = 0;
+    res.redirect(301, "/discussion/pager");
 };

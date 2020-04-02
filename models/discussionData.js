@@ -1,8 +1,8 @@
 let db = require('../util/database');
 
 
-function getAllDiscussions(limit, offset) {
-    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted, \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id order by id DESC LIMIT ' + limit + ' OFFSET ' + offset);
+function getAllDiscussions(limit, offset, topic) {
+    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted, \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id AND topic like \'%' + topic + '%\' order by id DESC LIMIT ' + limit + ' OFFSET ' + offset);
 }
 
 // Add a single individual to the database
@@ -15,8 +15,8 @@ function getUserPostNum(id) {
     return db.query('Select count(id) as posts from discussion where userid = ' + id);
 }
 
-function getPostNum(id) {
-    return db.query('Select count(id) as posts from discussion');
+function getPostNum(topic) {
+    return db.query('Select count(id) as posts from discussion WHERE topic like \'%' + topic + '%\'');
 }
 
 module.exports = {

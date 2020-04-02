@@ -15,6 +15,8 @@ router.get('/discussion/pager', discussionController.loadHomeByPage);
 
 router.post('/discussion/addreply/:id', discussionController.addDiscussionReply)
 
+router.post('/discussion/searchtopic', discussionController.searchByTopic)
+
 // router.post('/logout', artistController.transport);
 
 // router.get('/artists', artistController.getAllArtists);
