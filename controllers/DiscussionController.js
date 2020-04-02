@@ -3,7 +3,7 @@ let discussionModel = require('../models/discussionData');
 let discussionReplyModel = require('../models/discussionReplyData');
 
 exports.loadHome = async (req, res, next) => {
-      let Users = await userModel.load(1);
+    let Users = await userModel.load(1);
       let Disc = await discussionModel.getall(5, 0, "");
       for(var i = 0; i < Disc.rows.length; i++){
           
@@ -12,6 +12,8 @@ exports.loadHome = async (req, res, next) => {
         Disc.rows[i]["replies"] = DiscReply.rows;
         Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
       }
+      req.session.page = 0;
+    req.session.topic = "";
       console.log(Disc.rows);
       let DiscPosts = await discussionModel.getposts(req.session.u_id);
         res.render('home', {
@@ -30,6 +32,7 @@ exports.loadHomeByPage = async (req, res, next) => {
     if(sTopic == ""){
         sTopic = "All";
     }
+    console.log(sTopic);
     let Users = await userModel.load(1);
     let Disc = await discussionModel.getall(5, req.session.page, req.session.topic);
     for(var i = 0; i < Disc.rows.length; i++){    
