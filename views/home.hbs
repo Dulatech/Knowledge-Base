@@ -8,7 +8,7 @@
                 <p id ="userAbout">{{user.about}}</p>
                 <a id ="userPosts" href="/">Posts</a>           <p id ="postNum">{{discposts.posts}}</p> <br>
                 <a id ="userMsg" href="/">Messages</a>          <p id ="msgNum">0</p> <br>
-                <p id ="userLikes">Likes</p>                    <p id ="likeNum">0</p> <br>
+                <p id ="userLikes">Likes</p>                    <p id ="likeNum">{{user.likes}}</p> <br>
                 <a id ="edit" href="/">Edit Profile</a>
             </div>
 
@@ -35,8 +35,8 @@
                 <div id ="discDiv">
                     <form id ="topicForm" action="/discussion/searchtopic" method="POST">
                         <p id ="topicLab">Search by Topic</p>
-                        <select id ="topicSel" name="topic" required>
-                            <option value="curr" selected disabled hidden>{{selectedtopic}}</option>
+                        <select id ="topicSel" name="topic" required oninvalid="this.setCustomValidity('Topic already selected')" oninput="this.setCustomValidity('')"  >
+                            <option value="" selected disabled hidden>{{selectedtopic}}</option>
                             <option value="all">All</option>
                             <option value="php">php</option>
                             <option value="nodejs">nodejs</option>

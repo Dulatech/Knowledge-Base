@@ -5,6 +5,8 @@ let discussionReplyModel = require('../models/discussionReplyData');
 exports.loadHome = async (req, res, next) => {
     let Users = await userModel.load(1);
       let Disc = await discussionModel.getall(5, 0, "");
+      req.session.page = 0;
+    req.session.topic = "";
       for(var i = 0; i < Disc.rows.length; i++){
           
         let DiscReply = await discussionReplyModel.allreplies(Disc.rows[i].id);
@@ -12,8 +14,7 @@ exports.loadHome = async (req, res, next) => {
         Disc.rows[i]["replies"] = DiscReply.rows;
         Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
       }
-      req.session.page = 0;
-    req.session.topic = "";
+      
       console.log(Disc.rows);
       let DiscPosts = await discussionModel.getposts(req.session.u_id);
         res.render('home', {
@@ -22,7 +23,8 @@ exports.loadHome = async (req, res, next) => {
             discposts: DiscPosts.rows[0],
             truePrev: false,
             selectedtopic: "All",
-            trueNext: true
+            trueNext: true,
+            trueHomeCSS: true
          });
         
 };
@@ -51,7 +53,8 @@ exports.loadHomeByPage = async (req, res, next) => {
             discposts: DiscPosts.rows[0],
             truePrev: false,
             trueNext: false,
-            selectedtopic: sTopic
+            selectedtopic: sTopic,
+            trueHomeCSS: true
          });
     }else if(req.session.page <= 0){
       res.render('home', {
@@ -60,7 +63,8 @@ exports.loadHomeByPage = async (req, res, next) => {
           discposts: DiscPosts.rows[0],
           truePrev: false,
           trueNext: true,
-          selectedtopic: sTopic
+          selectedtopic: sTopic,
+          trueHomeCSS: true
        });
     } else if (req.session.page + 5 >= AllPosts.rows[0].posts){
       res.render('home', {
@@ -69,7 +73,8 @@ exports.loadHomeByPage = async (req, res, next) => {
           discposts: DiscPosts.rows[0],
           truePrev: true,
           trueNext: false,
-          selectedtopic: sTopic
+          selectedtopic: sTopic,
+          trueHomeCSS: true
        });
     } else {
       res.render('home', {
@@ -78,7 +83,8 @@ exports.loadHomeByPage = async (req, res, next) => {
           discposts: DiscPosts.rows[0],
           truePrev: true,
           trueNext: true,
-          selectedtopic: sTopic
+          selectedtopic: sTopic,
+          trueHomeCSS: true
        });
     }
  
