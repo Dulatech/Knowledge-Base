@@ -1,0 +1,26 @@
+{{>header}}
+
+<div class = "content">
+
+  <div id = "allMessgaes_panel">
+    {{#each msg}}
+      <a href="/messages/view">
+        <div id = "messageBanner">
+          <img class ="userPic" src='{{this.imgurl}}' alt="Smiley face">
+          <h3>{{this.name}}</h3>
+          {{this.subject}}
+        </div>
+        </a>
+        {{/each}}
+  </div>
+
+  <div id = "selectedMessage_panel">
+    <div id="messageWindow">
+      {{#each selectedMsg}}
+        <img class ="userPic" src='{{this.imgurl}}' alt="Smiley face">
+        <h3>{{this.name}}</h3>
+        {{this.subject}}
+      {{/each}}
+    </div>
+  </div>
+</div>
