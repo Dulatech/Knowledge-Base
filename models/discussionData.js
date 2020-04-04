@@ -5,6 +5,10 @@ function getAllDiscussions(limit, offset, topic) {
     return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted, \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id AND topic like \'%' + topic + '%\' order by dateposted DESC LIMIT ' + limit + ' OFFSET ' + offset);
 }
 
+function getUserDiscussions(limit, offset, id) {
+    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted, \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id AND userid =' + id + ' order by dateposted DESC LIMIT ' + limit + ' OFFSET ' + offset);
+}
+
 // Add a single individual to the database
 function addDisc(data) {
     let sql = "Insert into discussion (userid, title, body, topic) values (" + data.userid + ",'" + data.title + "','" + data.body + "','" + data.topic + "')";
@@ -22,6 +26,7 @@ function getPostNum(topic) {
 module.exports = {
     add: addDisc,
     getall: getAllDiscussions,
+    getuserdisc: getUserDiscussions,
     getposts: getUserPostNum,
     getallposts: getPostNum
 }

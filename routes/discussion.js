@@ -17,15 +17,4 @@ router.post('/discussion/addreply/:id', discussionController.addDiscussionReply)
 
 router.post('/discussion/searchtopic', discussionController.searchByTopic);
 
-
-// router.post('/logout', artistController.transport);
-
-// router.get('/artists', artistController.getAllArtists);
-
-// router.post('/artists/add', artistController.postAddArtists)
-
-// router.get('/artists/delete/:id', artistController.postDeleteArtists)
-
-// router.get('/artists/search/', artistController.getArtists)
-
 module.exports = router;

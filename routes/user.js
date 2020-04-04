@@ -7,16 +7,14 @@ router.get('/user/profile/editor', profileController.profileEditor);
 
 router.post('/user/profile/edit', profileController.editProfile);
 
-// router.post('/login', loginController.transport);
+router.get('/user/profile/posts', profileController.getAllCurrentUserPosts);
 
-// router.post('/logout', artistController.transport);
+router.post('/user/profile/posts/nextPage', profileController.nextPage);
 
-// router.get('/artists', artistController.getAllArtists);
+router.post('/user/profile/posts/prevPage', profileController.prevPage);
 
-// router.post('/artists/add', artistController.postAddArtists)
+router.get('/user/profile/posts/pager', profileController.loadCurrentUserPostsByPage);
 
-// router.get('/artists/delete/:id', artistController.postDeleteArtists)
-
-// router.get('/artists/search/', artistController.getArtists)
+router.post('/user/profile/posts/addreply/:id', profileController.addDiscussionReply);
 
 module.exports = router;
