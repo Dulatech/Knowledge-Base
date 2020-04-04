@@ -8,15 +8,15 @@
         <input id ="imgInp" name="imageurl" value="{{user.imageurl}}" type="text" required>
         <p id ="firstNameLbl">First Name</p>
         <p id ="lastNameLbl">Last Name</p>
-        <input id ="firstNameInp" name="firstname" value="{{user.firstname}}" type="text" required>
+        <input id ="firstNameInp" name="firstname" value="{{user.firstname}}" type="text" required maxlength="20">
         
-        <input id ="lastNameInp" name="lastname" value="{{user.lastname}}" type="text" required>
+        <input id ="lastNameInp" name="lastname" value="{{user.lastname}}" type="text" maxlength="20" required>
         <p id ="countryLbl">Country</p>
-        <input id ="countryInp" name="country" value="{{user.country}}" type="text" required>
+        <input id ="countryInp" name="country" value="{{user.country}}" type="text" required maxlength="50">
         <p id ="DOBLbl">Date of Birth</p>
         <input type="date" id="DOBInp" name="dob" value="{{user.re_format}}" required>
         <p id ="aboutLbl">About</p>
-        <textarea id ="aboutInp" name="about" type="text" required>{{user.about}}</textarea>
+        <textarea id ="aboutInp" name="about" type="text" required maxlength="300">{{user.about}}</textarea>
         <br>
         <button id ="editSubmit">Save and Update Profile</button>
     </form>

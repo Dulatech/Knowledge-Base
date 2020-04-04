@@ -91,6 +91,7 @@
 #formSub{
     margin-bottom: 10px;
     width: 258px;
+    
 }
 
 #formBod{
@@ -175,10 +176,14 @@
 }
 
 #discSub{
+    width:260px;
     margin-left: 20px;
-    display: inline;
     font-weight: bold;
+    display: inline-flex;
+    margin-top: 0;
+    margin-bottom: 0;
 }
+
 #discTopic{
     margin: 0;
     float: right;
@@ -195,6 +200,7 @@
 #discBody{
     margin-left: 40px;
     font-size: 10pt;
+    height: 100px;
 }
 
 #discDate{

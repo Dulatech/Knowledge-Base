@@ -16,9 +16,9 @@
                 <div id ="formDiv">
                     <h2 id ="formHead">Whats your question today?</h2>
                     <form id ="formForm" action="/discussion/add" method="POST">
-                        <input id ="formSub" name="subject" placeholder="Subject" type="text" required>
+                        <input id ="formSub" name="subject" placeholder="Subject" type="text" required maxlength="50">
                         <br>
-                        <textarea id ="formBod" name="body" placeholder="Explain in detail ..." type="text" required></textarea>
+                        <textarea id ="formBod" name="body" placeholder="Explain in detail ..." type="text" required maxlength="300"></textarea>
                         <br>
                         <select id ="formTopic" name="topic" required>
                             <option value="" selected disabled hidden>Topic</option>
@@ -75,7 +75,7 @@
                                         </ul>
                                         <div id = "newReplyDiv">
                                             <form id ="replyForm" action="/discussion/addreply/{{this.id}}" method="POST">
-                                                <textarea id ="replyBod" name="body" placeholder="Add your reply ..." type="text" required></textarea>
+                                                <textarea id ="replyBod" name="body" placeholder="Add your reply ..." type="text" required maxlength="300"></textarea>
                                                 <br>
                                                 <button id ="replyButton">Comment</button>
                                             </form>
