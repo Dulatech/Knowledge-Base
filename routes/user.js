@@ -1,9 +1,11 @@
 const express = require('express');
-// const artistController = require('../controllers/ArtistController');
+const profileController = require('../controllers/ProfileController');
 
 const router = express.Router();
 
+router.get('/user/profile/editor', profileController.profileEditor);
 
+router.post('/user/profile/edit', profileController.editProfile);
 
 // router.post('/login', loginController.transport);
 

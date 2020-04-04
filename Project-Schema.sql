@@ -7,7 +7,8 @@ password  VARCHAR(20)  NOT NULL,
 about     VARCHAR(300) NOT NULL,
 imageURL  text         NOT NULL,
 DOB       date         NOT NULL,
-likes     integer      NOT NULL,
+likes     integer      NOT NULL DEFAULT 0,
+country   VARCHAR(50) NOT NULL,
 PRIMARY KEY(id)
 );
 
@@ -17,7 +18,7 @@ userId       integer      NOT NULL,
 title        VARCHAR(50)  NOT NULL,
 body         VARCHAR(300) NOT NULL,
 topic        text         NOT NULL,
-datePosted   date         NOT NULL DEFAULT CURRENT_DATE,
+datePosted   timestamp    NOT NULL DEFAULT NOW(),
 PRIMARY KEY(id),
 CONSTRAINT discussion_user_fk FOREIGN KEY (userId)
       REFERENCES Users (id) MATCH SIMPLE
@@ -29,7 +30,7 @@ id               serial       NOT NULL,
 userId           integer      NOT NULL,
 discussionId     integer      NOT NULL,
 body             VARCHAR(300) NOT NULL,
-datePosted       date         NOT NULL DEFAULT CURRENT_DATE,
+datePosted       timestamp    NOT NULL DEFAULT NOW(),
 PRIMARY KEY(id),
 CONSTRAINT discussionreply_user_fk FOREIGN KEY (userId)
       REFERENCES Users (id) MATCH SIMPLE
@@ -44,7 +45,7 @@ id               serial       NOT NULL,
 senderId         integer      NOT NULL,
 recieverId       integer      NOT NULL,
 Subject          VARCHAR(50)  NOT NULL,
-dateSent         DATE         NOT NULL DEFAULT CURRENT_DATE,
+dateSent         timestamp    NOT NULL DEFAULT NOW(),
 PRIMARY KEY(id),
 CONSTRAINT message_user_send_fk FOREIGN KEY (senderId)
       REFERENCES Users (id) MATCH SIMPLE
@@ -60,7 +61,7 @@ messageId        integer      NOT NULL,
 senderId         integer      NOT NULL,
 recieverId       integer      NOT NULL,
 body             VARCHAR(200) NOT NULL,
-dateSent         DATE         NOT NULL DEFAULT CURRENT_DATE,
+dateSent         timestamp    NOT NULL DEFAULT NOW(),
 PRIMARY KEY(id),
 CONSTRAINT messagereply_message_fk FOREIGN KEY (messageId)
       REFERENCES Message (id) MATCH SIMPLE

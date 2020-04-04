@@ -13,9 +13,10 @@ router.post('/discussion/prevPage', discussionController.prevPage);
 
 router.get('/discussion/pager', discussionController.loadHomeByPage);
 
-router.post('/discussion/addreply/:id', discussionController.addDiscussionReply)
+router.post('/discussion/addreply/:id', discussionController.addDiscussionReply);
 
-router.post('/discussion/searchtopic', discussionController.searchByTopic)
+router.post('/discussion/searchtopic', discussionController.searchByTopic);
+
 
 // router.post('/logout', artistController.transport);
 

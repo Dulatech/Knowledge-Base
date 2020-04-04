@@ -1,0 +1,82 @@
+
+
+#editDiv{
+    width: 850px;
+    margin: 0 auto;
+    display: inline;
+}
+
+#editTitle{
+    text-align: center;
+}
+
+#editForm{
+    margin: 0 auto;
+    width: 400px;
+}
+
+#userImg{
+    height: 130px;
+    width: 130px;
+    margin-left: auto;
+  margin-right: auto;
+  display: block; 
+  margin-bottom: 10px;
+}
+
+p{
+    margin: 0;
+}
+
+#imgInp{
+    width: 98%;
+    margin-bottom: 20px;
+}
+
+#firstNameLbl{
+    display: inline-block;
+    width: 50%;
+    
+}
+
+#firstNameInp{
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 10px;
+}
+
+#lastNameLbl{
+    display: inline;
+}
+
+#lastNameInp{
+    display: inline-block;
+    width: 46%;
+}
+
+#countryInp{
+    width: 98%;
+    margin-bottom: 10px;
+}
+
+#DOBInp{
+    width: 98%;
+    margin-bottom: 10px;
+}
+
+#aboutInp{
+    width: 98%;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+#editSubmit{
+    background-color: rgb(43, 152, 255);
+    width: 100%;
+    border: 0;
+    border-color: rgb(43, 152, 255);
+    color: rgb(255, 255, 255);
+    height: 30px;
+    cursor:pointer;
+}
+
