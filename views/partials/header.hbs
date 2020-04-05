@@ -3,9 +3,9 @@
             <button id ="homeLogo" type="submit" formaction="/discussion" method ="GET">k<span id= 'logospan'>b</span></button>
             </form>
             <div id = "headerDiv">
-                <form id ="searchForm">
+                <form id ="searchForm" formaction="/discussion/search" method ="GET">
                     <input id ="searchInput" name="search" placeholder="Search" type="text">
-                    <img id="searchIMG" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/945px-Vector_search_icon.svg.png" />
+                    <a href="javascript:{}" onclick="document.getElementById('searchForm').submit();"><img id="searchIMG"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/945px-Vector_search_icon.svg.png" /></a>
                 </form>
                 <form id ="logoutForm" formaction="/logout" method ="POST">
                     <button id ="logoutBtn" >Logout</button>
