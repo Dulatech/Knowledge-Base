@@ -1,0 +1,38 @@
+.content {
+    width: 850px;
+    display: table;
+    margin: 0 auto;
+}
+
+#allMessgaes_panel {
+  margin-top: 140px;
+  float: left;
+  clear: both;
+  width: 270px;
+  border: 1px solid lightblue; 
+  font-size: 12pt;
+}
+
+.userPic{
+  float:left;
+  margin-top: 6px;
+  width: 60px;
+  padding: 10px;
+}
+
+#messageBanner {
+  border: 1px solid lightblue; 
+}
+
+#messageWindow{
+  border: 1px solid lightblue; 
+  width:580px;
+  height: 600px;
+  margin-left: 270px;
+  margin-top: 90px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

@@ -1,6 +1,17 @@
 {{>header}}
         <div id = "container">
-            {{>userSidebar}}
 
+            {{>userSidebar}}
+            <div id ="userDiv">
+                <a href="/">
+                    <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face">
+                </a>
+                <h3 id ="userName">{{user.firstname}} {{user.lastname}}</h3>
+                <p id ="userAbout">{{user.about}}</p>
+                <a id ="userPosts" href="/">Posts</a>           <p id ="postNum">{{discposts.posts}}</p> <br>
+                <a id ="userMsg" href="/messages">Messages</a>          <p id ="msgNum">0</p> <br>
+                <p id ="userLikes">Likes</p>                    <p id ="likeNum">{{user.likes}}</p> <br>
+                <a id ="edit" href="/user/profile/editor">Edit Profile</a>
+            </div>
             {{>allDiscussions}}
         </div>  
