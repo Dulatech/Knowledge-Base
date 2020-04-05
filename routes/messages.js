@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/messages', msgController.getAllMessages);
 
-// router.post('/artists/add', artistController.postAddArtists)
+router.post('/messages/addReply', msgController.addReply)
 
 router.post('/messages/view', msgController.gelSelectedMessage);
 

@@ -5,12 +5,10 @@ let userDataModel = require('../models/userData')
 var Messages;
 
 exports.getAllMessages =  async (req, res, next) => {
-  // future: need to use req.session idhere instead of 1!
     Messages = await messageDataModel.gelAll(req.session.u_id);
     
     for (let i = 0; i < Messages.rows.length; i ++) {
       var User;
-      // use req.session id
       if (Messages.rows[i].senderid != req.session.u_id) {
         User = await userDataModel.load(Messages.rows[i].senderid);
       }
@@ -29,7 +27,6 @@ exports.getAllMessages =  async (req, res, next) => {
  };
 
  exports.gelSelectedMessage = async (req, res, next) => {
-  console.log(req.body.id);
   var Replies = await messageReplyDataModel.getSelectedMessage(req.body.id);
   for (let i = 0; i < Replies.rows.length; i ++) {
     var User = await userDataModel.load(Replies.rows[i].senderid);
@@ -40,6 +37,45 @@ exports.getAllMessages =  async (req, res, next) => {
   res.render("messages", {
     trueMessageCSS: true,
     msg: Messages.rows,
-    selectedMsg: Replies.rows
+    selectedMsg: Replies.rows,
+    selectedMsgId: req.body.id
   });
  };
+
+ exports.addReply = async (req, res, next) => {
+   if (typeof selectedMsg === 'undefined' || selectedMsg === null) {
+    res.render("messages", {
+      trueMessageCSS: true,
+      msg: Messages.rows
+    });
+    return;
+   }
+  let senderId = req.session.u_id;
+  let reply = req.body.reply;
+  let msgId = req.body.id;
+  let rcvrId;
+  
+  var ReplyTemp = await messageReplyDataModel.getSelectedMessage(req.body.id);
+  if (ReplyTemp.rows[0].senderid == senderId) {
+    rcvrId = ReplyTemp.rows[0].recieverid;
+  }
+  else {
+    rcvrId = ReplyTemp.rows[0].senderid;
+  }
+
+  await messageReplyDataModel.addReply(msgId, senderId, rcvrId, reply);
+
+  var Replies = await messageReplyDataModel.getSelectedMessage(req.body.id);
+  for (let i = 0; i < Replies.rows.length; i ++) {
+    var User = await userDataModel.load(Replies.rows[i].senderid);
+    Replies.rows[i]["imgurl"] =  User.rows[0].imageurl;
+    Replies.rows[i]["name"] = User.rows[0].firstname + ' ' + User.rows[0].lastname;
+  }
+
+  res.render("messages", {
+    trueMessageCSS: true,
+    msg: Messages.rows,
+    selectedMsg: Replies.rows,
+    selectedMsgId: req.body.id
+  });
+ }
