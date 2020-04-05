@@ -1,13 +1,13 @@
 <header>
-            <form id = "logoForm">
-            <button id ="homeLogo" type="submit" formaction="/discussion" method ="GET">k<span id= 'logospan'>b</span></button>
-            </form>
+            
+            <a href="/discussion" id ="alogo"><button id ="homeLogo" type="submit" >k<span id= 'logospan'>b</span></button></a>
             <div id = "headerDiv">
-                <form id ="searchForm" formaction="/discussion/search" method ="GET">
-                    <input id ="searchInput" name="search" placeholder="Search" type="text">
-                    <a href="javascript:{}" onclick="document.getElementById('searchForm').submit();"><img id="searchIMG"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/945px-Vector_search_icon.svg.png" /></a>
+                <form id ="searchForm" action="/discussion/search" method ="GET">
+                    <input id ="searchInput" name="search" placeholder="Search" type="text" required>
+                     <button id ="searchBtn" >Search</button>
+                    <img onclick='look_click();' id="searchIMG"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/945px-Vector_search_icon.svg.png" />
                 </form>
-                <form id ="logoutForm" formaction="/logout" method ="POST">
+                <form id ="logoutForm" action="/logout" method ="POST">
                     <button id ="logoutBtn" >Logout</button>
                 </form>
             </div>

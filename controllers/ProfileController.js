@@ -21,7 +21,7 @@ exports.getAllCurrentUserPosts = async (req, res, next) => {
             discposts: DiscPosts.rows[0],
             truePrev: false,
             trueNext: false,
-            trueHomeCSS: true
+            trueCurrUserPostsCSS: true
          });
         } else {
             res.render('currProfilePosts', {
