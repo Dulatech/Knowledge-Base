@@ -28,7 +28,7 @@
                                              {{/each}}
                                         </ul>
                                         <div id = "newReplyDiv">
-                                            <form id ="replyForm" action="/user/profile/posts/addreply/{{this.id}}" method="POST">
+                                            <form id ="replyForm" action="/profile/posts/addreply/{{this.id}}" method="POST">
                                                 <textarea id ="replyBod" name="body" placeholder="Add your reply ..." type="text" required maxlength="300"></textarea>
                                                 <br>
                                                 <button id ="replyButton">Comment</button>
@@ -44,13 +44,13 @@
                     </ul>
                     <div id= "navDiv">
                         {{#if truePrev}}
-                        <form id ="prevForm" action="/user/profile/posts/prevPage" method="POST">
+                        <form id ="prevForm" action="/profile/posts/prevPage" method="POST">
                             <button id ="prevBtn"><- Prevous</button>
                         </form>
                         {{/if}}
                         
                         {{#if trueNext}}
-                        <form id ="nextForm" action="/user/profile/posts/nextPage" method="POST">
+                        <form id ="nextForm" action="/profile/posts/nextPage" method="POST">
                             <button id ="nextBtn">Next -></button>
                         </form>
                         {{/if}}

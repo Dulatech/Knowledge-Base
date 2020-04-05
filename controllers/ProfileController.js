@@ -97,19 +97,19 @@ exports.addDiscussionReply = async (req, res, next) => {
      }
      console.log(drObject);
      let Discussion = await discussionReplyModel.addr(drObject);
-    res.redirect(301, "/user/profile/posts/pager");
+    res.redirect(301, "/profile/posts/pager");
 
 };
 
 
 exports.nextPage = async (req, res, next) => {
     req.session.page = req.session.page + 5;
-    res.redirect(301, "/user/profile/posts/pager");
+    res.redirect(301, "/profile/posts/pager");
 };
 
 exports.prevPage = async (req, res, next) => {
     req.session.page = req.session.page - 5;
-    res.redirect(301, "/user/profile/posts/pager");
+    res.redirect(301, "/profile/posts/pager");
 };
 
 exports.profileEditor = async (req, res, next) => {

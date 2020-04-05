@@ -31,7 +31,7 @@ app.use(session({
 app.use(bodyParser.json())
 
 let loginRoutes = require('./routes/login');
-let userRoutes = require('./routes/user');
+let profileRoutes = require('./routes/profile');
 let discussionRoutes = require('./routes/discussion');
 let messagesRoutes = require('./routes/messages')
 
@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 });
 
 app.use(loginRoutes);
-app.use(userRoutes);
+app.use(profileRoutes);
 app.use(discussionRoutes);
 app.use(messagesRoutes);
 
