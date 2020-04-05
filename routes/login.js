@@ -5,6 +5,7 @@ const router = express.Router();
 
 
 router.post('/login', loginController.transport);
+router.get('/register' registerController.transport);
 // router.post('/login', loginController.transport);
 
 // router.post('/logout', artistController.transport);
