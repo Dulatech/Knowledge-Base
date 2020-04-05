@@ -6,6 +6,12 @@ function getSelectedMessageReplies(id) {
     return db.query(sql);
 }
 
+function addReply(msgId, senderId, rcvrId, reply) {
+    let sql = "Insert into messagereply (messageid, senderid, recieverid, body) values ('" + msgId + "','"+ senderId + "','" + rcvrId + "','" + reply + "')";
+    return db.query(sql);
+}
+
 module.exports = {
-    getSelectedMessage: getSelectedMessageReplies
+    getSelectedMessage: getSelectedMessageReplies,
+    addReply: addReply
 }

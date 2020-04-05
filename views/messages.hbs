@@ -19,13 +19,22 @@
   </div>
 
   <div id = "selectedMessage_panel">
-    <div id="messageWindow">
       {{#each selectedMsg}}
+      <div id="messageSingle">
         <img class ="userPic" src='{{this.imgurl}}' alt="Smiley face">
         <p id = "datesent">{{this.date_format}}</p>
         <h3>{{this.name}}</h3>
         <p id="messageBody">{{this.body}}</p>
+      </div>
       {{/each}}
-    </div>
+
+        <div id = "replySection">
+          <form method="POST" action="/messages/addReply">
+            <input type="text" placeholder="Write Reply..." name="reply">
+             <input type="hidden" name="id" value={{selectedMsgId}}>
+            <button type="submit" value="send" name="sendButton">Send</button>
+          </form>
+        </div>
   </div>
+
 </div>
