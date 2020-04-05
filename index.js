@@ -31,8 +31,9 @@ app.use(session({
 app.use(bodyParser.json())
 
 let loginRoutes = require('./routes/login');
-let userRoutes = require('./routes/user');
+let profileRoutes = require('./routes/profile');
 let discussionRoutes = require('./routes/discussion');
+let messagesRoutes = require('./routes/messages')
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -42,7 +43,8 @@ app.get('/', function (req, res) {
 });
 
 app.use(loginRoutes);
-app.use(userRoutes);
+app.use(profileRoutes);
 app.use(discussionRoutes);
+app.use(messagesRoutes);
 
 app.listen(process.env.PORT || 4000, () => console.log('localhost:4000'))

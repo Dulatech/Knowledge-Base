@@ -15,7 +15,7 @@ exports.getAllCurrentUserPosts = async (req, res, next) => {
       console.log(Disc.rows);
       let DiscPosts = await discussionModel.getposts(req.session.u_id);
       if (DiscPosts.rows[0].posts <= 5) {
-        res.render('currentUserPosts', {
+        res.render('currProfilePosts', {
             user: Users.rows[0],
             disc: Disc.rows,
             discposts: DiscPosts.rows[0],
@@ -24,7 +24,7 @@ exports.getAllCurrentUserPosts = async (req, res, next) => {
             trueHomeCSS: true
          });
         } else {
-            res.render('currentUserPosts', {
+            res.render('currProfilePosts', {
             user: Users.rows[0],
             disc: Disc.rows,
             discposts: DiscPosts.rows[0],
@@ -47,7 +47,7 @@ exports.loadCurrentUserPostsByPage = async (req, res, next) => {
     console.log(Disc.rows);
     let DiscPosts = await discussionModel.getposts(req.session.u_id);
     if (DiscPosts.rows[0].posts <= 5) {
-        res.render('currentUserPosts', {
+        res.render('currProfilePosts', {
             user: Users.rows[0],
             disc: Disc.rows,
             discposts: DiscPosts.rows[0],
@@ -56,7 +56,7 @@ exports.loadCurrentUserPostsByPage = async (req, res, next) => {
             trueCurrUserPostsCSS: true
          });
     }else if(req.session.page <= 0){
-      res.render('currentUserPosts', {
+      res.render('currProfilePosts', {
           user: Users.rows[0],
           disc: Disc.rows,
           discposts: DiscPosts.rows[0],
@@ -65,7 +65,7 @@ exports.loadCurrentUserPostsByPage = async (req, res, next) => {
           trueCurrUserPostsCSS: true
        });
     } else if (req.session.page + 5 >= DiscPosts.rows[0].posts){
-      res.render('currentUserPosts', {
+      res.render('currProfilePosts', {
           user: Users.rows[0],
           disc: Disc.rows,
           discposts: DiscPosts.rows[0],
@@ -74,7 +74,7 @@ exports.loadCurrentUserPostsByPage = async (req, res, next) => {
           trueCurrUserPostsCSS: true
        });
     } else {
-      res.render('currentUserPosts', {
+      res.render('currProfilePosts', {
           user: Users.rows[0],
           disc: Disc.rows,
           discposts: DiscPosts.rows[0],
@@ -97,19 +97,19 @@ exports.addDiscussionReply = async (req, res, next) => {
      }
      console.log(drObject);
      let Discussion = await discussionReplyModel.addr(drObject);
-    res.redirect(301, "/user/profile/posts/pager");
+    res.redirect(301, "/profile/posts/pager");
 
 };
 
 
 exports.nextPage = async (req, res, next) => {
     req.session.page = req.session.page + 5;
-    res.redirect(301, "/user/profile/posts/pager");
+    res.redirect(301, "/profile/posts/pager");
 };
 
 exports.prevPage = async (req, res, next) => {
     req.session.page = req.session.page - 5;
-    res.redirect(301, "/user/profile/posts/pager");
+    res.redirect(301, "/profile/posts/pager");
 };
 
 exports.profileEditor = async (req, res, next) => {

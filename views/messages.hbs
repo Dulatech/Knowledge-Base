@@ -1,0 +1,31 @@
+{{>header}}
+
+<div class = "content">
+
+  <div id = "allMessgaes_panel">
+    {{#each msg}}
+      <form method="POST" action="/messages/view">
+      <button type="submit">
+        <div id = "messageBanner">
+          <img class ="userPic" id = "bannerImg" src='{{this.imgurl}}' alt="Smiley face">
+            <p>{{this.date_format}}</p>
+          <h3>{{this.name}}</h3>
+          {{this.subject}}
+          <input type="hidden" name="id" value={{this.id}}>
+        </div>
+        </button>
+      </form>
+    {{/each}}
+  </div>
+
+  <div id = "selectedMessage_panel">
+    <div id="messageWindow">
+      {{#each selectedMsg}}
+        <img class ="userPic" src='{{this.imgurl}}' alt="Smiley face">
+        <p id = "datesent">{{this.date_format}}</p>
+        <h3>{{this.name}}</h3>
+        <p id="messageBody">{{this.body}}</p>
+      {{/each}}
+    </div>
+  </div>
+</div>

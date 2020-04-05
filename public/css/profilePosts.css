@@ -88,70 +88,11 @@
     width:60%;
 }
 
-#formSub{
-    margin-bottom: 10px;
-    width: 258px;
-    
+
+#formHead{
+    margin-top: 70px;
 }
 
-#formBod{
-    margin-bottom: 10px;
-    width: 250px;
-    padding:0 5px 50px;
-}
-
-#formTopic{
-    background-color: rgb(255, 255, 255);
-    height: 30px;
-    text-align: left;
-    border: 1px solid;
-    border-color: rgb(43, 152, 255);
-    color: rgb(43, 152, 255);
-    height: 20px;
-    width: 150px;
-    cursor:pointer;
-}
-
-#formButton{
-    background-color: rgb(255, 255, 255);
-    height: 30px;
-    text-align: left;
-    border: 1px solid;
-    border-color: rgb(43, 152, 255);
-    color: rgb(43, 152, 255);
-    height: 20px;
-    cursor:pointer;
-}
-
-#topicLab{
-    font-size: 10pt;
-    margin-top: 30px;
-    margin-right: 10px;
-    display: inline-block;
-}
-
-#topicBtn{
-    background-color: rgb(255, 255, 255);
-    height: 30px;
-    text-align: left;
-    border: 1px solid;
-    border-color: rgb(43, 152, 255);
-    color: rgb(43, 152, 255);
-    height: 20px;
-    cursor:pointer;
-}
-
-#topicSel{
-    background-color: rgb(255, 255, 255);
-    height: 30px;
-    text-align: left;
-    border: 1px solid;
-    border-color: rgb(43, 152, 255);
-    color: rgb(43, 152, 255);
-    height: 20px;
-    width: 150px;
-    cursor:pointer;
-}
 
 #discList{
     list-style: none;
