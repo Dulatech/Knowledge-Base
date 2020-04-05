@@ -17,4 +17,6 @@ router.post('/discussion/addreply/:id', discussionController.addDiscussionReply)
 
 router.post('/discussion/searchtopic', discussionController.searchByTopic);
 
+router.get('/discussion/search', discussionController.search);
+
 module.exports = router;

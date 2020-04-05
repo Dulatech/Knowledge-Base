@@ -29,8 +29,17 @@ exports.getAllMessages =  async (req, res, next) => {
  };
 
  exports.gelSelectedMessage = async (req, res, next) => {
+  console.log(req.body.id);
+  var Replies = await messageReplyDataModel.getSelectedMessage(req.body.id);
+  for (let i = 0; i < Replies.rows.length; i ++) {
+    var User = await userDataModel.load(Replies.rows[i].senderid);
+    Replies.rows[i]["imgurl"] =  User.rows[0].imageurl;
+    Replies.rows[i]["name"] = User.rows[0].firstname + ' ' + User.rows[0].lastname;
+  }
+
   res.render("messages", {
     trueMessageCSS: true,
-    msg: Messages.rows
+    msg: Messages.rows,
+    selectedMsg: Replies.rows
   });
  };

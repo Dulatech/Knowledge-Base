@@ -17,7 +17,6 @@ exports.loadHome = async (req, res, next) => {
         Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
       }
       
-      console.log(Disc.rows);
       let DiscPosts = await discussionModel.getposts(req.session.u_id); // gets the number of posts made by the signed in user
         res.render('home', {
             user: Users.rows[0],
@@ -36,7 +35,6 @@ exports.loadHomeByPage = async (req, res, next) => {
     if(sTopic == ""){
         sTopic = "All";
     }
-    console.log(sTopic);
     let Users = await userModel.load(req.session.u_id); // returns user and all info
     let Disc = await discussionModel.getall(5, req.session.page, req.session.topic); // returns all the discussions
     for(var i = 0; i < Disc.rows.length; i++){ // for loop to add all the replies to all discussions
@@ -45,7 +43,6 @@ exports.loadHomeByPage = async (req, res, next) => {
         Disc.rows[i]["replies"] = DiscReply.rows;
         Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
     }
-    console.log(Disc.rows);
     let DiscPosts = await discussionModel.getposts(req.session.u_id);  // gets the number of posts made by the signed in user
     let AllPosts = await discussionModel.getallposts(req.session.topic);  // gets the number of posts made all users
     if (AllPosts.rows[0].posts <= 5) { // if less then five total posts
@@ -144,4 +141,10 @@ exports.searchByTopic = async (req, res, next) => {
     console.log(req.session.topic);
     req.session.page = 0;
     res.redirect(301, "/discussion/pager");
+};
+
+exports.search = async (req, res, next) => {
+    let search = req.body.search;
+    console.log(search);
+    res.redirect(301, "/");
 };
