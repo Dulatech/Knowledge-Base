@@ -1,9 +1,9 @@
 {{>header}}
 
 <div id="profileDiv">
-    <form id ="profileForm" action="/user/profile/1" method="POST">
+    <form id ="profileForm" action="/profile/getProfile" method="POST">
     <div id = "userInfo">
-        <a href="/user/profile">
+        <a href="/profile/userProfile">
             <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face">
         </a>
         <h2 id ="userName">{{user.firstname}} {{user.lastname}}</h2>
@@ -18,7 +18,6 @@
     </div>
 
     <div id = "userPosts">
-        {{>currentUserDiscussions}}
     </div>
 
     </form>

@@ -7,6 +7,10 @@ router.get('/profile/editor', profileController.profileEditor);
 
 router.post('/profile/edit', profileController.editProfile);
 
+router.get('/profile/userProfile', profileController.userProfile);
+
+router.post('/profile/getProfile', profileController.getProfile);
+
 router.get('/profile/posts', profileController.getAllCurrentUserPosts);
 
 router.post('/profile/posts/nextPage', profileController.nextPage);
