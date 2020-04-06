@@ -143,8 +143,108 @@ exports.searchByTopic = async (req, res, next) => {
     res.redirect(301, "/discussion/pager");
 };
 
+// search functionality---------------------------------------------------
+
 exports.search = async (req, res, next) => {
-    let search = req.body.search;
-    console.log(search);
-    res.redirect(301, "/");
+    let search = req.query.search;
+    let Disc = await discussionModel.getsearched(5, 0, search); // returns all the discussions
+    req.session.page = 0;
+    req.session.search = search;
+      for(var i = 0; i < Disc.rows.length; i++){ // for loop to add all the replies to all discussions
+          
+        let DiscReply = await discussionReplyModel.allreplies(Disc.rows[i].id);
+        let DiscReplyNum = await discussionReplyModel.repliesnum(Disc.rows[i].id);
+        Disc.rows[i]["replies"] = DiscReply.rows;
+        Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
+      }
+      
+      let DiscPosts = await discussionModel.getsearchednum(search); // gets the number of posts made by the signed in user
+      if (DiscPosts.rows[0].posts <= 5) {
+        res.render('searchDiscussions', {
+            disc: Disc.rows,
+            search: req.session.search,
+            truePrev: false,
+            trueNext: false,
+            trueSearchCSS: true
+         });
+        } else {
+            res.render('searchDiscussions', {
+            disc: Disc.rows,
+            search: req.session.search,
+            truePrev: false,
+            trueNext: true,
+            trueSearchCSS: true
+         });
+        }
+};
+
+exports.loadSearchByPage = async (req, res, next) => {
+    let Disc = await discussionModel.getsearched(5, req.session.page, req.session.search); // returns all the discussions
+    for(var i = 0; i < Disc.rows.length; i++){ // for loop to add all the replies to all discussions
+        let DiscReply = await discussionReplyModel.allreplies(Disc.rows[i].id);
+        let DiscReplyNum = await discussionReplyModel.repliesnum(Disc.rows[i].id);
+        Disc.rows[i]["replies"] = DiscReply.rows;
+        Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
+    }
+    let DiscPosts = await discussionModel.getsearchednum(req.session.search);  // gets the number of posts made by the signed in user
+   
+    if (DiscPosts.rows[0].posts <= 5) { // if less then five total posts
+        res.render('searchDiscussions', {
+            disc: Disc.rows,
+            truePrev: false,
+            trueNext: false,
+            search: req.session.search,
+            trueSearchCSS: true
+         });
+    }else if(req.session.page <= 0){  // if page is zero
+      res.render('searchDiscussions', {
+          disc: Disc.rows,
+          truePrev: false,
+          trueNext: true,
+          search: req.session.search,
+          trueSearchCSS: true
+       });
+    } else if (req.session.page + 5 >= DiscPosts.rows[0].posts){ // if no more pages
+      res.render('searchDiscussions', {
+          disc: Disc.rows,
+          truePrev: true,
+          trueNext: false,
+          search: req.session.search,
+          trueSearchCSS: true
+       });
+    } else {
+      res.render('searchDiscussions', { // if can go next or previous page
+          disc: Disc.rows,
+          truePrev: true,
+          trueNext: true,
+          search: req.session.search,
+          trueSearchCSS: true
+       });
+    }
+ 
+};
+
+exports.nextSearchPage = async (req, res, next) => {
+    req.session.page = req.session.page + 5;
+    res.redirect(301, "/discussion/search/pager");
+};
+
+exports.prevSearchPage = async (req, res, next) => {
+    req.session.page = req.session.page - 5;
+    res.redirect(301, "/discussion/search/pager");
+};
+
+exports.addDiscussionReplySearch = async (req, res, next) => {
+    let u_id = req.session.u_id;
+    let d_id = req.params.id;
+    let dr_body = req.body.body;
+    let drObject = {
+        userid: u_id,
+        discussionid: d_id,
+        body: dr_body
+     }
+     console.log(drObject);
+     let Discussion = await discussionReplyModel.addr(drObject);
+    res.redirect(301, "/discussion/search/pager");
+
 };

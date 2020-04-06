@@ -19,4 +19,12 @@ router.post('/discussion/searchtopic', discussionController.searchByTopic);
 
 router.get('/discussion/search', discussionController.search);
 
+router.post('/discussion/search/nextPage', discussionController.nextSearchPage);
+
+router.post('/discussion/search/prevPage', discussionController.prevSearchPage);
+
+router.get('/discussion/search/pager', discussionController.loadSearchByPage);
+
+router.post('/discussion/search/addreply/:id', discussionController.addDiscussionReplySearch);
+
 module.exports = router;

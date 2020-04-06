@@ -13,8 +13,8 @@ header{
     margin: 0 auto;
 }
 
-#logoForm{
-    display: inline;
+#searchBtn{
+    display:none;
 }
 
 #headerDiv{
@@ -29,6 +29,10 @@ header{
     width: 300px;
 }
 
+#alogo{
+    text-decoration: none;
+}
+
 #homeLogo{
     margin: 0;
     padding: 0;
@@ -41,6 +45,7 @@ header{
     border: 0;
     background-color: white;
     cursor:pointer;
+    
 }
 
 #logospan{
