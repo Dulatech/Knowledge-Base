@@ -1,0 +1,25 @@
+{{>header}}
+
+<div id="profileDiv">
+    <form id ="profileForm" action="/user/profile/1" method="POST">
+    <div id = "userInfo">
+        <a href="/user/profile">
+            <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face">
+        </a>
+        <h2 id ="userName">{{user.firstname}} {{user.lastname}}</h2>
+        <h3 id ="userAbout">dad | hello | world</h3>
+        <h3 id ="userLocation">{{user.country}}</h3>
+    </div>
+
+    <div id = "userMisc">
+        <button id ="msgButton">Messages<a id ="userMsg" href="/"></a></button><br>
+        <p id ="likeNum">{{user.likes}}</p>         <p id ="userLikes">Likes</p>  <button id = "likeButton"> + </button>
+        <p id="userPosts">{{discposts.posts}} <a href="/user/profile/posts"></a>Posts</p><br>
+    </div>
+
+    <div id = "userPosts">
+        {{>currentUserDiscussions}}
+    </div>
+
+    </form>
+</div>
