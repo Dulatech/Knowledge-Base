@@ -7,7 +7,7 @@ function addDiscReply(data) {
 }
 
 function getDiscussionsReplies(id) {
-    return db.query('Select discussionreply.id, userid, discussionid, imageurl, body, to_char(dateposted, \'DD mon YYYY\') as re_format from discussionreply, users WHERE discussionreply.userid = users.id AND discussionid = ' + id  + ' order by dateposted ASC');
+    return db.query('Select discussionreply.id, userid, discussionid, imageurl, body, to_char(dateposted::timestamptz at time zone \'pst8pdt\', \'DD mon YYYY\') as re_format from discussionreply, users WHERE discussionreply.userid = users.id AND discussionid = ' + id  + ' order by dateposted ASC');
 }
 
 function getDiscussionsRepliesCount(id) {
