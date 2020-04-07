@@ -11,7 +11,12 @@ function createMessage(data) {
     return db.query(sql);
 }
 
+function getUserMsgNum(id) {
+    return db.query('Select count(id) as messages from message where senderid = ' + id + ' OR recieverid = ' + id);
+}
+
 module.exports = {
     gelAll: getAllMessages,
-    create: createMessage
+    create: createMessage,
+    msgNum: getUserMsgNum
 }

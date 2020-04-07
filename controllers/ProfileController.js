@@ -1,6 +1,7 @@
 let userModel = require('../models/userData');
 let discussionModel = require('../models/discussionData');
 let discussionReplyModel = require('../models/discussionReplyData');
+let messageModel = require('../models/messageData');
 
 exports.getAllCurrentUserPosts = async (req, res, next) => {
     let Users = await userModel.load(req.session.u_id);
@@ -14,10 +15,12 @@ exports.getAllCurrentUserPosts = async (req, res, next) => {
       }
       console.log(Disc.rows);
       let DiscPosts = await discussionModel.getposts(req.session.u_id);
+      let Msgs = await messageModel.msgNum(req.session.u_id);
       if (DiscPosts.rows[0].posts <= 5) {
         res.render('currProfilePosts', {
             user: Users.rows[0],
             disc: Disc.rows,
+            msgnum: Msgs.rows[0],
             discposts: DiscPosts.rows[0],
             truePrev: false,
             trueNext: false,
@@ -27,6 +30,7 @@ exports.getAllCurrentUserPosts = async (req, res, next) => {
             res.render('currProfilePosts', {
             user: Users.rows[0],
             disc: Disc.rows,
+            msgnum: Msgs.rows[0],
             discposts: DiscPosts.rows[0],
             truePrev: false,
             trueNext: true,
@@ -46,10 +50,12 @@ exports.loadCurrentUserPostsByPage = async (req, res, next) => {
     }
     console.log(Disc.rows);
     let DiscPosts = await discussionModel.getposts(req.session.u_id);
+    let Msgs = await messageModel.msgNum(req.session.u_id);
     if (DiscPosts.rows[0].posts <= 5) {
         res.render('currProfilePosts', {
             user: Users.rows[0],
             disc: Disc.rows,
+            msgnum: Msgs.rows[0],
             discposts: DiscPosts.rows[0],
             truePrev: false,
             trueNext: false,
@@ -59,6 +65,7 @@ exports.loadCurrentUserPostsByPage = async (req, res, next) => {
       res.render('currProfilePosts', {
           user: Users.rows[0],
           disc: Disc.rows,
+          msgnum: Msgs.rows[0],
           discposts: DiscPosts.rows[0],
           truePrev: false,
           trueNext: true,
@@ -68,6 +75,7 @@ exports.loadCurrentUserPostsByPage = async (req, res, next) => {
       res.render('currProfilePosts', {
           user: Users.rows[0],
           disc: Disc.rows,
+          msgnum: Msgs.rows[0],
           discposts: DiscPosts.rows[0],
           truePrev: true,
           trueNext: false,
@@ -77,6 +85,7 @@ exports.loadCurrentUserPostsByPage = async (req, res, next) => {
       res.render('currProfilePosts', {
           user: Users.rows[0],
           disc: Disc.rows,
+          msgnum: Msgs.rows[0],
           discposts: DiscPosts.rows[0],
           truePrev: true,
           trueNext: true,
