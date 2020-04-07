@@ -43,7 +43,7 @@ exports.getAllMessages =  async (req, res, next) => {
  };
 
  exports.addReply = async (req, res, next) => {
-   if (typeof selectedMsg === 'undefined' || selectedMsg === null) {
+   if (req.body.reply === "" || req.body.reply == null) {
     res.render("messages", {
       trueMessageCSS: true,
       msg: Messages.rows
@@ -78,4 +78,45 @@ exports.getAllMessages =  async (req, res, next) => {
     selectedMsg: Replies.rows,
     selectedMsgId: req.body.id
   });
+ }
+
+ exports.createMessage = async (req, res, next) => {
+  let u_id = req.session.u_id;
+  let reciever_id = 2;
+
+  var user = await userDataModel.load(reciever_id);
+  var name = user.rows[0].firstname + ' ' + user.rows[0].lastname;
+
+  res.render("createMessage", {
+    trueMessageCSS: true,
+    name: name,
+    recieverid: reciever_id
+  });
+
+ }
+
+ exports.sendNewMessage = async(req, res, next) => {
+  console.log("sender: " + req.session.u_id);
+  console.log("reciever: " +req.body.recieverid);
+  console.log("subject: " + req.body.subject);
+  console.log("body: " + req.body.msgBody);
+  let Msg = {
+    senderid: req.session.u_id,
+    recieverid: req.body.recieverid,
+    subject: req.body.subject,   
+  }
+  
+  let messageDetails = await messageDataModel.create(Msg);
+  let messageid = messageDetails.rows[0].id;
+
+  let Reply = {
+    messageid: messageid,
+    senderid: req.session.u_id,
+    recieverid: req.body.recieverid,
+    body: req.body.msgBody,
+
+  }
+  await messageReplyDataModel.create(Reply);
+  res.redirect(301, '/discussion');
+
  }
