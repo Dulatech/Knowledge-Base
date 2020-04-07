@@ -1,0 +1,26 @@
+{{>header}}
+
+<div class = "content">
+
+  <div id = "newMessageDiv">
+
+      <table id = "newMsgTable">
+        <tr>
+          <th>To: </th>
+          <td>{{this.name}}</td>
+        </tr>
+         <form method = "POST" action = "/profile/message/send">
+          <input type="hidden" name= "recieverid" value={{this.recieverid}}>
+          <tr>
+            <th>Subject: </th>
+            <td><input type="text" placeholder="Subject" name="subject"></td>
+          </tr>
+          <tr>
+            <th>Body: </th>
+            <td style="height:150px;"><textarea rows="4" cols="50" placeholder="Write Message..." name="msgBody" id="msgBody"></textarea></td>
+          </tr>
+          <button type="submit">Send</button>
+        </form>
+      </table>
+  </div>
+</div>

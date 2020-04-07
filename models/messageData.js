@@ -6,6 +6,12 @@ function getAllMessages(id) {
     return db.query(sql);
 }
 
+function createMessage(data) {
+    let sql = "insert into message (senderid, recieverid, subject) values('" + data.senderid + "', '" + data.recieverid + "', '" + data.subject + "') returning id";
+    return db.query(sql);
+}
+
 module.exports = {
-    gelAll: getAllMessages
+    gelAll: getAllMessages,
+    create: createMessage
 }

@@ -11,7 +11,13 @@ function addReply(msgId, senderId, rcvrId, reply) {
     return db.query(sql);
 }
 
+function createReply(data) {
+    let sql = "insert into messagereply (messageid, senderid, recieverid, body) values('" + data.messageid + "','" + data.senderid + "','" + data.recieverid + "','" + data.body + "')";
+    return db.query(sql);
+}
+
 module.exports = {
     getSelectedMessage: getSelectedMessageReplies,
-    addReply: addReply
+    addReply: addReply,
+    create: createReply
 }
