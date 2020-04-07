@@ -2,15 +2,15 @@ let db = require('../util/database');
 
 
 function getAllDiscussions(limit, offset, topic) {
-    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted, \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id AND topic like \'%' + topic + '%\' order by dateposted DESC LIMIT ' + limit + ' OFFSET ' + offset);
+    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted::timestamptz at time zone \'pst8pdt\', \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id AND topic like \'%' + topic + '%\' order by dateposted DESC LIMIT ' + limit + ' OFFSET ' + offset);
 }
 
 function getUserDiscussions(limit, offset, id) {
-    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted, \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id AND userid =' + id + ' order by dateposted DESC LIMIT ' + limit + ' OFFSET ' + offset);
+    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted::timestamptz at time zone \'pst8pdt\', \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id AND userid =' + id + ' order by dateposted DESC LIMIT ' + limit + ' OFFSET ' + offset);
 }
 
 function getSearchedDiscussions(limit, offset, search) {
-    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted, \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id AND title ilike \'%' + search + '%\' order by dateposted DESC LIMIT ' + limit + ' OFFSET ' + offset);
+    return db.query('Select discussion.id, userid, imageurl, title, body, topic, to_char(dateposted::timestamptz at time zone \'pst8pdt\', \'DD mon YYYY\') as re_format from discussion, users WHERE discussion.userid = users.id AND title ilike \'%' + search + '%\' order by dateposted DESC LIMIT ' + limit + ' OFFSET ' + offset);
 }
 
 // Add a single individual to the database

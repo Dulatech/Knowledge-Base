@@ -18,7 +18,7 @@ userId       integer      NOT NULL,
 title        VARCHAR(50)  NOT NULL,
 body         VARCHAR(300) NOT NULL,
 topic        text         NOT NULL,
-datePosted   timestamp    NOT NULL DEFAULT NOW(),
+datePosted   timestamptz    NOT NULL DEFAULT NOW(),
 PRIMARY KEY(id),
 CONSTRAINT discussion_user_fk FOREIGN KEY (userId)
       REFERENCES Users (id) MATCH SIMPLE
@@ -30,7 +30,7 @@ id               serial       NOT NULL,
 userId           integer      NOT NULL,
 discussionId     integer      NOT NULL,
 body             VARCHAR(300) NOT NULL,
-datePosted       timestamp    NOT NULL DEFAULT NOW(),
+datePosted       timestamptz    NOT NULL DEFAULT NOW(),
 PRIMARY KEY(id),
 CONSTRAINT discussionreply_user_fk FOREIGN KEY (userId)
       REFERENCES Users (id) MATCH SIMPLE
@@ -45,7 +45,7 @@ id               serial       NOT NULL,
 senderId         integer      NOT NULL,
 recieverId       integer      NOT NULL,
 Subject          VARCHAR(50)  NOT NULL,
-dateSent         timestamp    NOT NULL DEFAULT NOW(),
+dateSent         timestamptz    NOT NULL DEFAULT NOW(),
 PRIMARY KEY(id),
 CONSTRAINT message_user_send_fk FOREIGN KEY (senderId)
       REFERENCES Users (id) MATCH SIMPLE
@@ -61,7 +61,7 @@ messageId        integer      NOT NULL,
 senderId         integer      NOT NULL,
 recieverId       integer      NOT NULL,
 body             VARCHAR(200) NOT NULL,
-dateSent         timestamp    NOT NULL DEFAULT NOW(),
+dateSent         timestamptz    NOT NULL DEFAULT NOW(),
 PRIMARY KEY(id),
 CONSTRAINT messagereply_message_fk FOREIGN KEY (messageId)
       REFERENCES Message (id) MATCH SIMPLE
