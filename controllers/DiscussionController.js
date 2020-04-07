@@ -162,6 +162,9 @@ exports.searchByTopic = async (req, res, next) => {
 
 exports.search = async (req, res, next) => {
     let search = req.query.search;
+    search = search.replace(/ +(?= )/g, "");
+    search = search.trim();
+    console.log(search);
     let Disc = await discussionModel.getsearched(5, 0, search); // returns all the discussions
     req.session.page = 0;
     req.session.search = search;
