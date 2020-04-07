@@ -15,7 +15,7 @@ exports.getAllCurrentUserPosts = async (req, res, next) => {
       console.log(Disc.rows);
       let DiscPosts = await discussionModel.getposts(req.session.u_id);
       if (DiscPosts.rows[0].posts <= 5) {
-        res.render('currProfilePosts', {
+        res.render('currProfilePosts',  {
             user: Users.rows[0],
             disc: Disc.rows,
             discposts: DiscPosts.rows[0],
@@ -117,29 +117,44 @@ exports.userProfile = async (req, res, next) => {
 
     res.render('profilePage', {
         user: Users.rows[0],
-        trueProfilePageCSS: true
+        trueprofilePageCSS: true
      });
 };
 
 exports.getProfile = async(req,res,next)=>{
-    let u_id = req.session.u_id;
-    let u_imageurl = req.body.imageurl;
-    let u_first = req.body.firstname;
-    let u_last = req.body.lastname;
-    let u_country = req.body.country;
-    let u_dob = req.body.dob;
-    let u_about = req.body.about;
-    let uObject = {
-        id: u_id,
-        imageurl: u_imageurl,
-        firstname: u_first,
-        lastname: u_last,
-        country: u_country,
-        dob: u_dob,
-        about: u_about
-     }
-     let User = await userModel.load(uObject);
-     res.redirect(301, "/discussion")
+    let Users = await userModel.load(req.session.u_id);
+    req.session.page = 0; 
+    let Disc = await discussionModel.getuserdisc(5, 0, req.session.u_id);
+      for(var i = 0; i < Disc.rows.length; i++){ 
+        let DiscReply = await discussionReplyModel.allreplies(Disc.rows[i].id);
+        let DiscReplyNum = await discussionReplyModel.repliesnum(Disc.rows[i].id);
+        Disc.rows[i]["replies"] = DiscReply.rows;
+        Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
+      }
+      console.log(Disc.rows);
+      let DiscPosts = await discussionModel.getposts(req.session.u_id);
+      if (DiscPosts.rows[0].posts <= 5) {
+        res.render('profilePage',  {
+            user: Users.rows[0],
+            disc: Disc.rows,
+            discposts: DiscPosts.rows[0],
+            truePrev: false,
+            trueNext: false,
+            trueprofilePageCSS: true,
+            trueCurrUserPostsCSS: true
+         });
+        } else {
+            res.render('profilePage', {
+            user: Users.rows[0],
+            disc: Disc.rows,
+            discposts: DiscPosts.rows[0],
+            truePrev: false,
+            trueNext: true,
+            trueCurrUserPostsCSS: true,
+            trueprofilePageCSS: true
+         });
+        }
+ 
 }
 
 exports.profileEditor = async (req, res, next) => {

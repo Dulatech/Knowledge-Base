@@ -5,20 +5,26 @@
     <div id = "userInfo">
         <a href="/profile/userProfile">
             <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face">
+        
         </a>
         <h2 id ="userName">{{user.firstname}} {{user.lastname}}</h2>
-        <h3 id ="userAbout">dad | hello | world</h3>
+        <h3 id ="userAbout">{{user.about}}</h3>
         <h3 id ="userLocation">{{user.country}}</h3>
     </div>
 
     <div id = "userMisc">
-        <button id ="msgButton">Messages<a id ="userMsg" href="/"></a></button><br>
-        <p id ="likeNum">{{user.likes}}</p>         <p id ="userLikes">Likes</p>  <button id = "likeButton"> + </button>
+        <button id ="msgButton">Messages<a id ="userMsg" href="/profile/message"></a></button><br>
+
+        <p id ="likeCount">{{user.likes}}</p>         <p id ="userLike">Likes</p>  <button id = "likeButton"> + </button>
+
         <p id="userPosts">{{discposts.posts}} <a href="/user/profile/posts"></a>Posts</p><br>
     </div>
 
-    <div id = "userPosts">
+    <div id="userPosts">
+    {{>profilePosts}}
     </div>
 
     </form>
+
+    
 </div>
