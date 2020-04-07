@@ -1,0 +1,99 @@
+#profileDiv{
+    width: 850px;
+    display: table;
+    margin: 0 auto;
+}
+
+/*3 profile page component*/
+
+#userInfo{
+    display: inline-block;
+    width:30%;
+}
+
+#userMisc{
+    display: inline-block;
+    color:#0073e6;
+    font-weight:bold;
+    font-size:18px;
+    margin-left:20%;
+}
+
+/*User Info Block*/
+#userPosts{
+    margin-top:10px !important; 
+}
+
+#userPic{
+  margin-top:20px;
+  display: block; 
+  border-radius: 50%;
+  height: 140px;
+  width: 140px;
+  border: 4px solid lightgrey;
+
+}
+
+#userName{
+  display:inline-block;
+}
+#userAbout{
+   display:inline-block;
+}
+
+
+/*User Misc Block*/
+
+#msgButton{
+    background-color: #0073e6;
+    border:none;
+    color:white;
+    font-size:14pt;
+    padding:7%;
+
+}
+
+#likeCount {
+    display: inline-block;
+    font-size:9pt;
+
+}
+
+#userLike{
+    font-size:9pt;
+    display: inline-block;
+}
+
+#likeButton{
+    border-radius: 24px;
+    color:white;
+    background-color: #0073e6;
+    border-color:transparent;
+
+}
+
+#userPosts{
+    margin-top:6px;
+    display:block;
+    margin-left:0;
+}
+
+#postNum{
+    margin-left:1%;
+    display: inline-block;
+}
+
+/*All post css override */
+
+#formHead{
+    margin-top: 20px !important;
+}
+
+#discList{
+    margin-top:2%;
+    margin-left:5%;
+}
+
+#rightDiv{
+    margin-left:10%;
+}

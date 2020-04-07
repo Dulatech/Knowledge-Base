@@ -17,7 +17,7 @@ exports.getAllCurrentUserPosts = async (req, res, next) => {
       let DiscPosts = await discussionModel.getposts(req.session.u_id);
       let Msgs = await messageModel.msgNum(req.session.u_id);
       if (DiscPosts.rows[0].posts <= 5) {
-        res.render('currProfilePosts', {
+        res.render('currProfilePosts',  {
             user: Users.rows[0],
             disc: Disc.rows,
             msgnum: Msgs.rows[0],
@@ -120,6 +120,51 @@ exports.prevPage = async (req, res, next) => {
     req.session.page = req.session.page - 5;
     res.redirect(301, "/profile/posts/pager");
 };
+
+exports.userProfile = async (req, res, next) => {
+    let Users = await userModel.load(req.session.u_id);
+
+    res.render('profilePage', {
+        user: Users.rows[0],
+        trueprofilePageCSS: true
+     });
+};
+
+exports.getProfile = async(req,res,next)=>{
+    let Users = await userModel.load(req.session.u_id);
+    req.session.page = 0; 
+    let Disc = await discussionModel.getuserdisc(5, 0, req.session.u_id);
+      for(var i = 0; i < Disc.rows.length; i++){ 
+        let DiscReply = await discussionReplyModel.allreplies(Disc.rows[i].id);
+        let DiscReplyNum = await discussionReplyModel.repliesnum(Disc.rows[i].id);
+        Disc.rows[i]["replies"] = DiscReply.rows;
+        Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
+      }
+      console.log(Disc.rows);
+      let DiscPosts = await discussionModel.getposts(req.session.u_id);
+      if (DiscPosts.rows[0].posts <= 5) {
+        res.render('profilePage',  {
+            user: Users.rows[0],
+            disc: Disc.rows,
+            discposts: DiscPosts.rows[0],
+            truePrev: false,
+            trueNext: false,
+            trueprofilePageCSS: true,
+            trueCurrUserPostsCSS: true
+         });
+        } else {
+            res.render('profilePage', {
+            user: Users.rows[0],
+            disc: Disc.rows,
+            discposts: DiscPosts.rows[0],
+            truePrev: false,
+            trueNext: true,
+            trueCurrUserPostsCSS: true,
+            trueprofilePageCSS: true
+         });
+        }
+ 
+}
 
 exports.profileEditor = async (req, res, next) => {
     let Users = await userModel.load(req.session.u_id);
