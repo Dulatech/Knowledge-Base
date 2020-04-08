@@ -23,8 +23,7 @@ exports.logout = async (req, res, next) => {
             if (err) {
                return console.log(err);
             }
-            res.render('login', {
-               
+            res.render('login', {  
             });
          });
 };
