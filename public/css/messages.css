@@ -16,6 +16,8 @@
   width: 270px;
   border: 1px solid #e6e6e6; 
   font-size: 11pt;
+  overflow: scroll;
+  height: 550px;
 }
 
 .userPic{
