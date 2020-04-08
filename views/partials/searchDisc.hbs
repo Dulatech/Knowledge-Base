@@ -4,7 +4,7 @@
                         {{#each disc}}
                         <li id ="discListItem">
                             <div id ="disc">
-                                <a href="/">
+                                <a href="/user/{{this.userid}}">
                                     <img id ="friendImg" src="{{this.imageurl}}" alt="Smiley face">
                                 </a>
                                 <div id ="discInfo">
@@ -16,7 +16,7 @@
                                             {{#each replies}}
                                             <li id ="replyListItem">
                                                 <div id ="reply">
-                                                    <a href="/">    
+                                                    <a href="/user/{{this.userid}}">    
                                                         <img id ="friendReplyImg" src="{{this.imageurl}}" alt="Smiley face">
                                                     </a>
                                                     <div id ="replyInfo">

@@ -1,9 +1,9 @@
 {{>header}}
 
 <div id="profileDiv">
-    <form id ="profileForm" action="/profile/getProfile" method="POST">
+    
     <div id = "userInfo">
-        <a href="/profile/userProfile">
+        <a href="/user/{{user.id}}">
             <img id ="userPic" src='{{user.imageurl}}' alt="Smiley face">
         
         </a>
@@ -13,18 +13,18 @@
     </div>
 
     <div id = "userMisc">
-        <button id ="msgButton">Messages<a id ="userMsg" href="/profile/message"></a></button><br>
-
+        <form id ="replyForm" action="/message/{{user.id}}" method="GET">
+            <button id ="msgButton">Message</button>                           
+        </form><br>
         <p id ="likeCount">{{user.likes}}</p>         <p id ="userLike">Likes</p>  <button id = "likeButton"> + </button>
 
-        <p id="userPosts">{{discposts.posts}} <a href="/user/profile/posts"></a>Posts</p><br>
+        <p id="userPosts">{{discposts.posts}} Posts</p><br>
     </div>
 
     <div id="userPosts">
-    {{>profilePosts}}
+    {{>userPosts}}
     </div>
 
-    </form>
 
     
 </div>
