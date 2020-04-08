@@ -25,6 +25,7 @@
 }
 
 #userPic{
+  margin-left:0px;
   margin-top:20px;
   display: block; 
   border-radius: 50%;
@@ -35,10 +36,12 @@
 }
 
 #userName{
-  display:inline-block;
+  display:block;
+  text-align:left;
 }
 #userAbout{
-   display:inline-block;
+   display:block;
+   text-align: left;
 }
 
 #likeForm{

@@ -15,7 +15,7 @@
     <div id = "userMisc">
         <form id ="replyForm" action="/message/{{user.id}}" method="GET">
             <button id ="msgButton">Message</button>                           
-        </form><br>
+        </form>
         <p id ="likeCount">{{user.likes}}</p>         <p id ="userLike">Likes</p>  
         {{#if notsame}}
             {{#if likedTrue}}
@@ -30,7 +30,7 @@
         {{/if}}
         
 
-        <p id="userPosts">{{discposts.posts}} Posts</p><br>
+        <p id="userPosts">{{discposts.posts}} Posts</p>
     </div>
 
     <div id="userPosts">
