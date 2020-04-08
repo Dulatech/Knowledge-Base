@@ -23,10 +23,17 @@ function getUserNum(email) {
     return db.query('Select count(id) as users from users where email = \'' + email + '\'');
 }
 
+function createUser(data){
+    let sql = "Insert into users (firstname, lastname, email, password, about, imageurl, dob, country) values ('" + data.firstname + "','" + data.lastname
+    + "','" + data.email + "','" + data.password + "','" + data.about + "','" + data.dob + "','" + data.country + "')";
+    return db.query(sql);
+}
+
 module.exports = {
     load: loadUser,
     edit: editUser,
     inc: incUserLikes,
     dec: decUserLikes,
-    user: getUserNum
+    user: getUserNum,
+    createUser: createUser
 }

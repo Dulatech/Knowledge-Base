@@ -86,4 +86,3 @@ CONSTRAINT messagereply_recieve_user_fk FOREIGN KEY (recieverId)
       REFERENCES Users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-
