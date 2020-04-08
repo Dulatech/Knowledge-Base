@@ -118,7 +118,7 @@ exports.getMessages =  async (req, res, next) => {
     let Msg = {
       senderid: req.session.u_id,
       recieverid: req.body.recieverid,
-      subject: req.body.subject,   
+      subject: (req.body.subject ? req.body.subject : ""),   
     }
     
     let messageDetails = await messageDataModel.create(Msg);
@@ -128,7 +128,7 @@ exports.getMessages =  async (req, res, next) => {
       messageid: messageid,
       senderid: req.session.u_id,
       recieverid: req.body.recieverid,
-      body: req.body.msgBody,
+      body: (req.body.msgBody ? req.body.msgBody : ""),
 
     }
     await messageReplyDataModel.create(Reply);
