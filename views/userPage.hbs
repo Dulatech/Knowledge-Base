@@ -16,7 +16,19 @@
         <form id ="replyForm" action="/message/{{user.id}}" method="GET">
             <button id ="msgButton">Message</button>                           
         </form><br>
-        <p id ="likeCount">{{user.likes}}</p>         <p id ="userLike">Likes</p>  <button id = "likeButton"> + </button>
+        <p id ="likeCount">{{user.likes}}</p>         <p id ="userLike">Likes</p>  
+        {{#if notsame}}
+            {{#if likedTrue}}
+            <form id ="likeForm" action="/user/{{user.id}}/dislike" method="POST">
+                <button id = "likeButton2"> - </button>
+            </form> 
+            {{else}}
+             <form id ="likeForm" action="/user/{{user.id}}/like" method="POST">
+                <button id = "likeButton"> + </button>
+            </form> 
+            {{/if}}
+        {{/if}}
+        
 
         <p id="userPosts">{{discposts.posts}} Posts</p><br>
     </div>

@@ -11,8 +11,17 @@ function editUser(data) {
     + data.country + "', dob = '" + data.dob + "', about = '" + data.about + "' WHERE id =" + data.id);
 }
 
+function incUserLikes(id) {
+    return db.query("Update Users SET likes = likes + 1  WHERE id =" + id);
+}
+
+function decUserLikes(id) {
+    return db.query("Update Users SET likes = likes - 1  WHERE id =" + id);
+}
 
 module.exports = {
     load: loadUser,
-    edit: editUser
+    edit: editUser,
+    inc: incUserLikes,
+    dec: decUserLikes
 }

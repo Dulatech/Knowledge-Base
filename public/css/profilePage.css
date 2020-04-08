@@ -41,6 +41,10 @@
    display:inline-block;
 }
 
+#likeForm{
+    display:inline-block;
+}
+
 
 /*User Misc Block*/
 
@@ -69,6 +73,16 @@
     color:white;
     background-color: #0073e6;
     border-color:transparent;
+    cursor:pointer;
+
+}
+
+#likeButton2{
+    border-radius: 24px;
+    color:white;
+    background-color: #e60000;
+    border-color:transparent;
+    cursor:pointer;
 
 }
 
