@@ -10,14 +10,14 @@ margin: 0 auto;
   padding-left: 25px;
 }
 
-#KBtitle{
+#KBtitle2{
   font-size: 22pt;
   margin-top: 0;
   margin-bottom: 0;
   float: left;
 }
 
-#titleBase{
+#titleBase2{
   color: rgb(43, 152, 255);
 }
 
@@ -27,8 +27,9 @@ width: 200px;
 height: 325px;
 }
 
-#topBar {
+#topBar2 {
   height: 50px;
+  font-size: 22pt;
 }
 
 #regTwoFormInput {

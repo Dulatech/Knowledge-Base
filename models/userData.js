@@ -6,8 +6,8 @@ function loadUser(id) {
 }
 
 function editUser(data) {
-    return db.query("Update Users SET imageurl = '" + data.imageurl + "', firstname = '" 
-    + data.firstname + "', lastname = '" + data.lastname + "', country = '" 
+    return db.query("Update Users SET imageurl = '" + data.imageurl + "', firstname = '"
+    + data.firstname + "', lastname = '" + data.lastname + "', country = '"
     + data.country + "', dob = '" + data.dob + "', about = '" + data.about + "' WHERE id =" + data.id);
 }
 
@@ -19,9 +19,14 @@ function decUserLikes(id) {
     return db.query("Update Users SET likes = likes - 1  WHERE id =" + id);
 }
 
+function getUserNum(email) {
+    return db.query('Select count(id) as users from users where email = \'' + email + '\'');
+}
+
 module.exports = {
     load: loadUser,
     edit: editUser,
     inc: incUserLikes,
-    dec: decUserLikes
+    dec: decUserLikes,
+    user: getUserNum
 }
