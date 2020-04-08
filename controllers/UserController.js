@@ -15,11 +15,13 @@ exports.getUser = async(req,res,next)=>{
       }
       console.log(Disc.rows);
       let DiscPosts = await discussionModel.getposts(id);
+      let LikePost = await userModel.like(id);
       if (DiscPosts.rows[0].posts <= 5) {
         res.render('userPage',  {
             user: Users.rows[0],
             disc: Disc.rows,
             discposts: DiscPosts.rows[0],
+            like: LikePost.rows,
             truePrev: false,
             trueNext: false,
             trueprofilePageCSS: true,
@@ -124,3 +126,4 @@ exports.prevPage = async (req, res, next) => {
     req.session.page = req.session.page - 5;
     res.redirect(301, "/user/"+ id +"/pager");
 };
+
