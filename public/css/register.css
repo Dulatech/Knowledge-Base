@@ -1,0 +1,52 @@
+#regDiv{
+display: table;
+margin: 0 auto;
+}
+
+#registerTwoDiv{
+  float: right;
+  width: 325px;
+  margin-top: 30px;
+  padding-left: 25px;
+}
+
+#KBtitle2{
+  font-size: 22pt;
+  margin-top: 0;
+  margin-bottom: 0;
+  float: left;
+}
+
+#titleBase2{
+  color: rgb(43, 152, 255);
+}
+
+#aboutYou{
+float: left;
+width: 200px;
+height: 325px;
+}
+
+#topBar2 {
+  height: 50px;
+  font-size: 22pt;
+}
+
+#regTwoFormInput {
+  margin-bottom: 10px;
+  width: 175px;
+}
+
+#regTwoFormAbout {
+  height:75px;
+  width: 175px;
+  margin-bottom: 10px;
+}
+
+#regTwoFormButton {
+  color: rgb(43, 152, 255);
+  height: 30px;
+  width: 175px;
+  background-color: white;
+  border-color: rgb(43, 152, 255);
+}

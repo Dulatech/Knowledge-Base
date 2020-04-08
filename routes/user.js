@@ -13,4 +13,8 @@ router.get('/user/:id/pager', userController.loadUserPostsByPage);
 
 router.post('/user/:userid/addreply/:id', userController.addDiscussionReply);
 
+router.post('/user/:id/like', userController.like);
+
+router.post('/user/:id/dislike', userController.dislike);
+
 module.exports = router;

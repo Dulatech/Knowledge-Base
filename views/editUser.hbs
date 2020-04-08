@@ -5,7 +5,7 @@
     <form id ="editForm" action="/profile/edit" method="POST">
         <img id ="userImg" src='{{user.imageurl}}' alt="Smiley face">
         <p id ="imgLbl">Image URL</p>
-        <input id ="imgInp" name="imageurl" value="{{user.imageurl}}" type="text" required>
+        <input id ="imgInp" name="imageurl" value="{{user.imageurl}}" type="url" required>
         <p id ="firstNameLbl">First Name</p>
         <p id ="lastNameLbl">Last Name</p>
         <input id ="firstNameInp" name="firstname" value="{{user.firstname}}" type="text" required maxlength="20">

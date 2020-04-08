@@ -1,8 +1,13 @@
 let userModel = require('../models/userData');
 let discussionModel = require('../models/discussionData');
 let discussionReplyModel = require('../models/discussionReplyData');
+let likesModel = require('../models/likeData');
 
 exports.getUser = async(req,res,next)=>{
+   //
+    var notSameUser = true;
+    var liked = false;
+    //
     let id = req.params.id;
     let Users = await userModel.load(id);
     req.session.page = 0; 
@@ -13,9 +18,19 @@ exports.getUser = async(req,res,next)=>{
         Disc.rows[i]["replies"] = DiscReply.rows;
         Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
       }
-      console.log(Disc.rows);
+      
       let DiscPosts = await discussionModel.getposts(id);
-      let LikePost = await userModel.like(id);
+     //
+      let Liked = await likesModel.liked(id, req.session.u_id);
+      console.log(id + "" + req.session.u_id);
+      console.log(Liked.rows[0].likes);
+      if (Liked.rows[0].likes > 0){
+        liked = true;
+      }
+      if(req.session.u_id == id){
+        notSameUser = false;
+      }
+//
       if (DiscPosts.rows[0].posts <= 5) {
         res.render('userPage',  {
             user: Users.rows[0],
@@ -25,7 +40,9 @@ exports.getUser = async(req,res,next)=>{
             truePrev: false,
             trueNext: false,
             trueprofilePageCSS: true,
-            trueCurrUserPostsCSS: true
+            trueCurrUserPostsCSS: true,
+            likedTrue: liked,
+            notsame: notSameUser
          });
         } else {
             res.render('userPage', {
@@ -35,13 +52,17 @@ exports.getUser = async(req,res,next)=>{
             truePrev: false,
             trueNext: true,
             trueCurrUserPostsCSS: true,
-            trueprofilePageCSS: true
+            trueprofilePageCSS: true,
+            likedTrue: liked,
+            notsame: notSameUser
          });
         }
  
 };
 
 exports.loadUserPostsByPage = async (req, res, next) => {
+    var notSameUser = true;
+    var liked = false;
     let id = req.params.id;
     console.log("hey");
     let Users = await userModel.load(id);
@@ -52,8 +73,16 @@ exports.loadUserPostsByPage = async (req, res, next) => {
         Disc.rows[i]["replies"] = DiscReply.rows;
         Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
     }
-    console.log(Disc.rows);
+    
     let DiscPosts = await discussionModel.getposts(id);
+    let Liked = await likesModel.liked(id, req.session.u_id);
+    console.log(Liked.rows[0].likes);
+    if (Liked.rows[0].likes > 0){
+      liked = true;
+    }
+    if(req.session.u_id == id){
+      notSameUser = false;
+    }
     if (DiscPosts.rows[0].posts <= 5) {
         res.render('userPage', {
             user: Users.rows[0],
@@ -62,7 +91,9 @@ exports.loadUserPostsByPage = async (req, res, next) => {
             truePrev: false,
             trueNext: false,
             trueCurrUserPostsCSS: true,
-            trueprofilePageCSS: true
+            trueprofilePageCSS: true,
+            likedTrue: liked,
+            notsame: notSameUser
          });
     }else if(req.session.page <= 0){
       res.render('userPage', {
@@ -72,7 +103,9 @@ exports.loadUserPostsByPage = async (req, res, next) => {
           truePrev: false,
           trueNext: true,
           trueCurrUserPostsCSS: true,
-          trueprofilePageCSS: true
+          trueprofilePageCSS: true,
+          likedTrue: liked,
+            notsame: notSameUser
        });
     } else if (req.session.page + 5 >= DiscPosts.rows[0].posts){
       res.render('userPage', {
@@ -82,7 +115,9 @@ exports.loadUserPostsByPage = async (req, res, next) => {
           truePrev: true,
           trueNext: false,
           trueCurrUserPostsCSS: true,
-          trueprofilePageCSS: true
+          trueprofilePageCSS: true,
+          likedTrue: liked,
+            notsame: notSameUser
        });
     } else {
       res.render('userPage', {
@@ -92,7 +127,9 @@ exports.loadUserPostsByPage = async (req, res, next) => {
           truePrev: true,
           trueNext: true,
           trueCurrUserPostsCSS: true,
-          trueprofilePageCSS: true
+          trueprofilePageCSS: true,
+          likedTrue: liked,
+            notsame: notSameUser
        });
     }
  
@@ -127,3 +164,24 @@ exports.prevPage = async (req, res, next) => {
     res.redirect(301, "/user/"+ id +"/pager");
 };
 
+exports.like = async (req, res, next) => {
+    let id = req.params.id;
+    let Like = await userModel.inc(id);
+    let likeObject = {
+        likedid: id,
+        likerid: req.session.u_id
+     }
+    let Liker = await likesModel.like(likeObject);
+    res.redirect(301, "/user/"+ id +"/pager");
+};
+
+exports.dislike = async (req, res, next) => {
+    let id = req.params.id;
+    let Dislike = await userModel.dec(id);
+    let likeObject = {
+        likedid: id,
+        likerid: req.session.u_id
+     }
+    let Disliker = await likesModel.dislike(likeObject);
+    res.redirect(301, "/user/"+ id +"/pager");
+};

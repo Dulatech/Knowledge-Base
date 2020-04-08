@@ -12,6 +12,19 @@ country   VARCHAR(50) NOT NULL,
 PRIMARY KEY(id)
 );
 
+CREATE TABLE Likes(
+id        serial       NOT NULL,
+likedId   integer      NOT NULL,
+likerId   integer      NOT NULL,
+PRIMARY KEY(id)
+CONSTRAINT likes_user_liked_fk FOREIGN KEY (likedId)
+      REFERENCES Users (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+CONSTRAINT likes_user_liker_fk FOREIGN KEY (likerID)
+      REFERENCES Users (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
 CREATE TABLE Discussion(
 id           serial       NOT NULL,
 userId       integer      NOT NULL,
@@ -73,4 +86,3 @@ CONSTRAINT messagereply_recieve_user_fk FOREIGN KEY (recieverId)
       REFERENCES Users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-
