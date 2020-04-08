@@ -4,12 +4,14 @@ let userDataModel = require('../models/userData')
 
 var Messages;
 
-exports.getAllMessages =  async (req, res, next) => {
-    Messages = await messageDataModel.gelAll(req.session.u_id);
+exports.getMessages =  async (req, res, next) => {
+    let u_id = req.session.u_id;
+    if (req.params.id == u_id) {
+      Messages = await messageDataModel.gelAll(u_id);
     
     for (let i = 0; i < Messages.rows.length; i ++) {
       var User;
-      if (Messages.rows[i].senderid != req.session.u_id) {
+      if (Messages.rows[i].senderid != u_id) {
         User = await userDataModel.load(Messages.rows[i].senderid);
       }
       else {
@@ -24,6 +26,20 @@ exports.getAllMessages =  async (req, res, next) => {
       trueMessageCSS: true,
       msg: Messages.rows
     });
+    }
+    
+    else {
+        let reciever_id = req.params.id;
+
+        var user = await userDataModel.load(reciever_id);
+        var name = user.rows[0].firstname + ' ' + user.rows[0].lastname;
+
+        res.render("createMessage", {
+          trueMessageCSS: true,
+          name: name,
+          recieverid: reciever_id
+        });
+    }
  };
 
  exports.gelSelectedMessage = async (req, res, next) => {
