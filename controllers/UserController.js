@@ -5,6 +5,7 @@ let likesModel = require('../models/likeData');
 
 exports.getUser = async(req,res,next)=>{
    //
+   if (req.session.u_id) {
     var notSameUser = true;
     var liked = false;
     //
@@ -56,10 +57,13 @@ exports.getUser = async(req,res,next)=>{
             notsame: notSameUser
          });
         }
- 
+      } else {
+        res.render('login', { });
+    }
 };
 
 exports.loadUserPostsByPage = async (req, res, next) => {
+  if (req.session.u_id) {
     var notSameUser = true;
     var liked = false;
     let id = req.params.id;
@@ -131,10 +135,13 @@ exports.loadUserPostsByPage = async (req, res, next) => {
             notsame: notSameUser
        });
     }
- 
+  } else {
+    res.render('login', { });
+}
 };
 
 exports.addDiscussionReply = async (req, res, next) => {
+  if (req.session.u_id) {
     let id = req.params.userid;
     let u_id = req.session.u_id;
     let d_id = req.params.id;
@@ -147,23 +154,35 @@ exports.addDiscussionReply = async (req, res, next) => {
      console.log(drObject);
      let Discussion = await discussionReplyModel.addr(drObject);
     res.redirect(301, "/user/"+ id +"/pager");
+  } else {
+    res.render('login', { });
+}
 
 };
 
 
 exports.nextPage = async (req, res, next) => {
+  if (req.session.u_id) {
     let id = req.params.id;
     req.session.page = req.session.page + 5;
     res.redirect(301, "/user/"+ id +"/pager");
+  } else {
+    res.render('login', { });
+}
 };
 
 exports.prevPage = async (req, res, next) => {
+  if (req.session.u_id) {
     let id = req.params.id;
     req.session.page = req.session.page - 5;
     res.redirect(301, "/user/"+ id +"/pager");
+  } else {
+    res.render('login', { });
+}
 };
 
 exports.like = async (req, res, next) => {
+  if (req.session.u_id) {
     let id = req.params.id;
     let Like = await userModel.inc(id);
     let likeObject = {
@@ -172,9 +191,13 @@ exports.like = async (req, res, next) => {
      }
     let Liker = await likesModel.like(likeObject);
     res.redirect(301, "/user/"+ id +"/pager");
+  } else {
+    res.render('login', { });
+}
 };
 
 exports.dislike = async (req, res, next) => {
+  if (req.session.u_id) {
     let id = req.params.id;
     let Dislike = await userModel.dec(id);
     let likeObject = {
@@ -183,4 +206,7 @@ exports.dislike = async (req, res, next) => {
      }
     let Disliker = await likesModel.dislike(likeObject);
     res.redirect(301, "/user/"+ id +"/pager");
+  } else {
+    res.render('login', { });
+}
 };

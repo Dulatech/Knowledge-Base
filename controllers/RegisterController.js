@@ -21,6 +21,7 @@ exports.transport = async (req, res, next) => {
 };
 
 exports.createUser = async (req, res, next) => {
+  if (req.session.email) {
     var imgurl = req.body.imgurl;
     var about = req.body.about;
     var country = req.body.country;
@@ -47,5 +48,8 @@ exports.createUser = async (req, res, next) => {
     req.session.u_id = user.rows[0].id;
     req.session.page = 0;
     res.redirect(301, '/discussion');
+  } else {
+    res.render('login', { });
+}
 
 }

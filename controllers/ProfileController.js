@@ -4,6 +4,7 @@ let discussionReplyModel = require('../models/discussionReplyData');
 let messageModel = require('../models/messageData');
 
 exports.getAllCurrentUserPosts = async (req, res, next) => {
+    if (req.session.u_id) {
     let Users = await userModel.load(req.session.u_id);
     req.session.page = 0; 
     let Disc = await discussionModel.getuserdisc(5, 0, req.session.u_id);
@@ -37,9 +38,13 @@ exports.getAllCurrentUserPosts = async (req, res, next) => {
             trueCurrUserPostsCSS: true
          });
         }
+    } else {
+        res.render('login', { });
+    }
 };
 
 exports.loadCurrentUserPostsByPage = async (req, res, next) => {
+    if (req.session.u_id) {
     let Users = await userModel.load(req.session.u_id);
     let Disc = await discussionModel.getuserdisc(5, req.session.page, req.session.u_id);
     for(var i = 0; i < Disc.rows.length; i++){    
@@ -92,10 +97,14 @@ exports.loadCurrentUserPostsByPage = async (req, res, next) => {
           trueCurrUserPostsCSS: true
        });
     }
+} else {
+    res.render('login', { });
+}
  
 };
 
 exports.addDiscussionReply = async (req, res, next) => {
+    if (req.session.u_id) {
     let u_id = req.session.u_id;
     let d_id = req.params.id;
     let dr_body = req.body.body;
@@ -107,75 +116,46 @@ exports.addDiscussionReply = async (req, res, next) => {
      console.log(drObject);
      let Discussion = await discussionReplyModel.addr(drObject);
     res.redirect(301, "/profile/posts/pager");
+} else {
+    res.render('login', { });
+}
 
 };
 
 
 exports.nextPage = async (req, res, next) => {
+    if (req.session.u_id) {
     req.session.page = req.session.page + 5;
     res.redirect(301, "/profile/posts/pager");
+} else {
+    res.render('login', { });
+}
 };
 
 exports.prevPage = async (req, res, next) => {
+    if (req.session.u_id) {
     req.session.page = req.session.page - 5;
     res.redirect(301, "/profile/posts/pager");
+} else {
+    res.render('login', { });
+}
 };
 
-// exports.userProfile = async (req, res, next) => {
-//     let Users = await userModel.load(req.session.u_id);
-
-//     res.render('profilePage', {
-//         user: Users.rows[0],
-//         trueprofilePageCSS: true
-//      });
-// };
-
-// exports.getProfile = async(req,res,next)=>{
-//     let Users = await userModel.load(req.session.u_id);
-//     req.session.page = 0; 
-//     let Disc = await discussionModel.getuserdisc(5, 0, req.session.u_id);
-//       for(var i = 0; i < Disc.rows.length; i++){ 
-//         let DiscReply = await discussionReplyModel.allreplies(Disc.rows[i].id);
-//         let DiscReplyNum = await discussionReplyModel.repliesnum(Disc.rows[i].id);
-//         Disc.rows[i]["replies"] = DiscReply.rows;
-//         Disc.rows[i]["repliesnum"] = DiscReplyNum.rows[0].repliesnum;
-//       }
-//       console.log(Disc.rows);
-//       let DiscPosts = await discussionModel.getposts(req.session.u_id);
-//       if (DiscPosts.rows[0].posts <= 5) {
-//         res.render('profilePage',  {
-//             user: Users.rows[0],
-//             disc: Disc.rows,
-//             discposts: DiscPosts.rows[0],
-//             truePrev: false,
-//             trueNext: false,
-//             trueprofilePageCSS: true,
-//             trueCurrUserPostsCSS: true
-//          });
-//         } else {
-//             res.render('profilePage', {
-//             user: Users.rows[0],
-//             disc: Disc.rows,
-//             discposts: DiscPosts.rows[0],
-//             truePrev: false,
-//             trueNext: true,
-//             trueCurrUserPostsCSS: true,
-//             trueprofilePageCSS: true
-//          });
-//         }
- 
-// };
-
 exports.profileEditor = async (req, res, next) => {
+    if (req.session.u_id) {
     let Users = await userModel.load(req.session.u_id);
 
     res.render('editUser', {
         user: Users.rows[0],
         trueEditCSS: true
      });
+    } else {
+        res.render('login', { });
+    }
 };
 
 exports.editProfile = async (req, res, next) => {
+    if (req.session.u_id) {
     let u_id = req.session.u_id;
     let u_imageurl = req.body.imageurl;
     let u_first = req.body.firstname;
@@ -195,4 +175,7 @@ exports.editProfile = async (req, res, next) => {
      console.log(uObject);
     let User = await userModel.edit(uObject);
     res.redirect(301, "/discussion");
+} else {
+    res.render('login', { });
+}
 };

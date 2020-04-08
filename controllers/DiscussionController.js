@@ -105,16 +105,25 @@ exports.loadHomeByPage = async (req, res, next) => {
 };
 
 exports.nextPage = async (req, res, next) => {
-    req.session.page = req.session.page + 5;
-    res.redirect(301, "/discussion/pager");
+    if (req.session.u_id) {
+        req.session.page = req.session.page + 5;
+        res.redirect(301, "/discussion/pager");
+    } else {
+        res.render('login', { });
+    }
 };
 
 exports.prevPage = async (req, res, next) => {
-    req.session.page = req.session.page - 5;
-    res.redirect(301, "/discussion/pager");
+    if (req.session.u_id) {
+        req.session.page = req.session.page - 5;
+        res.redirect(301, "/discussion/pager");
+    } else {
+    res.render('login', { });
+    }
 };
 
 exports.addDiscussion = async (req, res, next) => {
+    if (req.session.u_id) {
     let u_id = req.session.u_id;
     let d_title = req.body.subject;
     let d_body = req.body.body;
@@ -129,10 +138,13 @@ exports.addDiscussion = async (req, res, next) => {
      let Discussion = await discussionModel.add(dObject);
      req.session.page = 0;
     res.redirect(301, "/discussion");
-
+    } else {
+        res.render('login', { });
+    }
 };
 
 exports.addDiscussionReply = async (req, res, next) => {
+    if (req.session.u_id) {
     let u_id = req.session.u_id;
     let d_id = req.params.id;
     let dr_body = req.body.body;
@@ -144,10 +156,13 @@ exports.addDiscussionReply = async (req, res, next) => {
      console.log(drObject);
      let Discussion = await discussionReplyModel.addr(drObject);
     res.redirect(301, "/discussion/pager");
-
+    } else {
+        res.render('login', { });
+    }
 };
 
 exports.searchByTopic = async (req, res, next) => {
+    if (req.session.u_id) {
     let topic = req.body.topic;
     if(topic == "all"){
         topic = "";
@@ -156,11 +171,15 @@ exports.searchByTopic = async (req, res, next) => {
     console.log(req.session.topic);
     req.session.page = 0;
     res.redirect(301, "/discussion/pager");
+} else {
+    res.render('login', { });
+}
 };
 
 // search functionality---------------------------------------------------
 
 exports.search = async (req, res, next) => {
+    if (req.session.u_id) {
     let search = req.query.search;
     search = search.replace(/ +(?= )/g, "");
     search = search.trim();
@@ -194,9 +213,13 @@ exports.search = async (req, res, next) => {
             trueSearchCSS: true
          });
         }
+    } else {
+        res.render('login', { });
+    }
 };
 
 exports.loadSearchByPage = async (req, res, next) => {
+    if (req.session.u_id) {
     let Disc = await discussionModel.getsearched(5, req.session.page, req.session.search); // returns all the discussions
     for(var i = 0; i < Disc.rows.length; i++){ // for loop to add all the replies to all discussions
         let DiscReply = await discussionReplyModel.allreplies(Disc.rows[i].id);
@@ -239,20 +262,31 @@ exports.loadSearchByPage = async (req, res, next) => {
           trueSearchCSS: true
        });
     }
- 
+} else {
+    res.render('login', { });
+}
 };
 
 exports.nextSearchPage = async (req, res, next) => {
+    if (req.session.u_id) {
     req.session.page = req.session.page + 5;
     res.redirect(301, "/discussion/search/pager");
+} else {
+    res.render('login', { });
+}
 };
 
 exports.prevSearchPage = async (req, res, next) => {
+    if (req.session.u_id) {
     req.session.page = req.session.page - 5;
     res.redirect(301, "/discussion/search/pager");
+    } else {
+        res.render('login', { });
+    }
 };
 
 exports.addDiscussionReplySearch = async (req, res, next) => {
+    if (req.session.u_id) {
     let u_id = req.session.u_id;
     let d_id = req.params.id;
     let dr_body = req.body.body;
@@ -264,5 +298,8 @@ exports.addDiscussionReplySearch = async (req, res, next) => {
      console.log(drObject);
      let Discussion = await discussionReplyModel.addr(drObject);
     res.redirect(301, "/discussion/search/pager");
+} else {
+    res.render('login', { });
+}
 
 };
