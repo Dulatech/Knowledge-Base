@@ -20,12 +20,20 @@ function decUserLikes(id) {
 }
 
 function getUserNum(email) {
-    return db.query('Select count(id) as users from users where email = \'' + email + '\'');
+    return db.query("Select count(id) as users from users where email = '" + email + "'");
+}
+
+function getUserValidNum(email, password) {
+    return db.query("Select count(id) as users from users where email = '" + email + "' and password = '" + password + "'");
+}
+
+function getUserValid(email, password) {
+    return db.query("Select id from users where email = '" + email + "' and password = '" + password + "'");
 }
 
 function createUser(data){
     let sql = "Insert into users (firstname, lastname, email, password, about, imageurl, dob, country) values ('" + data.firstname + "','" + data.lastname
-    + "','" + data.email + "','" + data.password + "','" + data.about + "','" + data.dob + "','" + data.country + "')";
+    + "','" + data.email + "','" + data.password + "','" + data.about + "','" + data.imageurl + "','" + data.dob + "','" + data.country + "') returning id";
     return db.query(sql);
 }
 
@@ -35,5 +43,7 @@ module.exports = {
     inc: incUserLikes,
     dec: decUserLikes,
     user: getUserNum,
-    createUser: createUser
+    validuser: getUserValidNum, 
+    create: createUser,
+    getuser: getUserValid
 }
