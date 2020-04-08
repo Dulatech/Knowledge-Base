@@ -19,4 +19,6 @@ router.get('/profile/posts/pager', profileController.loadCurrentUserPostsByPage)
 
 router.post('/profile/posts/addreply/:id', profileController.addDiscussionReply);
 
+router.post('/profile/userProfile/likes', profileController.likeUser);
+
 module.exports = router;

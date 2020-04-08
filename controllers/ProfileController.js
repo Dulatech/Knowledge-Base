@@ -196,3 +196,15 @@ exports.editProfile = async (req, res, next) => {
     let User = await userModel.edit(uObject);
     res.redirect(301, "/discussion");
 };
+
+exports.likeUser = async (req,res, next) => {
+    let u_id = req.session.u_id;
+    let u_like = req.body.likes;
+    let uObject = {
+        id : u_id,
+        likes : u_like 
+    }
+
+    let User = await userModel.like(uObject);
+    res.redirect(301, "/discussion");
+}

@@ -11,8 +11,12 @@ function editUser(data) {
     + data.country + "', dob = '" + data.dob + "', about = '" + data.about + "' WHERE id =" + data.id);
 }
 
+function likeUser(data){
+    return db.query("Update Users SET likes'" + data.likes + 1 + "' WHERE id =" + data.id);
+}
 
 module.exports = {
     load: loadUser,
-    edit: editUser
+    edit: editUser,
+    like: likeUser
 }
