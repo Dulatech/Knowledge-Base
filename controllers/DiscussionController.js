@@ -20,6 +20,7 @@ exports.loadHome = async (req, res, next) => {
         
         let DiscPosts = await discussionModel.getposts(req.session.u_id); // gets the number of posts made by the signed in user
         let Msgs = await messageModel.msgNum(req.session.u_id);
+        if (DiscPosts.rows[0].posts <= 5) {
             res.render('home', {
                 user: Users.rows[0],
                 disc: Disc.rows,
@@ -30,6 +31,18 @@ exports.loadHome = async (req, res, next) => {
                 trueNext: true,
                 trueHomeCSS: true
             });
+            } else {
+                res.render('home', {
+                    user: Users.rows[0],
+                    disc: Disc.rows,
+                    discposts: DiscPosts.rows[0],
+                    msgnum: Msgs.rows[0],
+                    truePrev: false,
+                    selectedtopic: "All",
+                    trueNext: false,
+                    trueHomeCSS: true
+                });
+            }
         } else {
             res.render('login', { });
         }
