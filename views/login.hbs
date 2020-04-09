@@ -6,7 +6,11 @@
         <input id="loginFormInput" name="email" placeholder="email" type="email" required>
         <input id="loginFormInput" name="password" placeholder="password" type="password" required>
         <button id="loginFormButton"> Login</button>
+      {{#if trueNotExist}}
+       <p id = "error">Email or password incorrect</p>
+      {{/if}}
       </form>
+     
     </div>
     <div id="loginPicDiv">
       <img id="loginPic" src='https://i.ibb.co/TLnFXX0/vector-knowledge.jpg' alt="Books">
@@ -21,6 +25,12 @@
         <input id="registerFormInput" name="password" placeholder="password" type="password" maxlength="20" required>
         <input id="registerFormInput" name="confirmpassword" placeholder="confirm password" type="password" maxlength="20" required>
         <button id="registerFormButton"> Sign Up</button>
+          {{#if trueSame}}
+         <p id = "error">Password is not same</p>
+          {{/if}}
+          {{#if trueExist}}
+         <p id = "error">Email already exists</p>
+          {{/if}}
       </form>
     </div>
   </div>

@@ -13,6 +13,7 @@ exports.transport = async (req, res, next) => {
             res.redirect(301, '/discussion');
           } else {
             res.render('login', {
+                  trueNotExist: true
             });
           }
       

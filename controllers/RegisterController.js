@@ -10,10 +10,15 @@ exports.transport = async (req, res, next) => {
       let id = await userModel.user(req.session.email);
       console.log(id.rows[0].users);
       console.log(req.session.password + "   " + req.session.cpassword);
-      if((id.rows[0].users > 0) || (req.session.password != req.session.cpassword)){
+      if((id.rows[0].users > 0)){
         res.render('login', {
+          trueExist: true
         });
-      } else {
+      } else if ((req.session.password != req.session.cpassword)){
+        res.render('login', {
+          trueSame: true
+        });
+      } else{
         res.render('register', {
         });
       }
