@@ -3,11 +3,10 @@ let messageReplyDataModel = require('../models/messageReplyData')
 let userDataModel = require('../models/userData')
 let nodemailer = require('nodemailer');
 
-var Messages;
-
 exports.getMessages =  async (req, res, next) => {
   if (req.session.u_id) {
       let u_id = req.session.u_id;
+      let Messages;
       if (req.params.id == u_id) {
         Messages = await messageDataModel.gelAll(u_id);
       
@@ -31,8 +30,7 @@ exports.getMessages =  async (req, res, next) => {
       }
       
       else {
-          let reciever_id = req.params.id;
-
+          var reciever_id = req.params.id;
           var user = await userDataModel.load(reciever_id);
           var name = user.rows[0].firstname + ' ' + user.rows[0].lastname;
 
@@ -49,7 +47,22 @@ exports.getMessages =  async (req, res, next) => {
 
  exports.gelSelectedMessage = async (req, res, next) => {
   if (req.session.u_id) {
-  
+    let u_id = req.session.u_id;
+    var Messages = await messageDataModel.gelAll(u_id);
+
+    for (let i = 0; i < Messages.rows.length; i ++) {
+      var User;
+      if (Messages.rows[i].senderid != u_id) {
+        User = await userDataModel.load(Messages.rows[i].senderid);
+      }
+      else {
+        User = await userDataModel.load(Messages.rows[i].recieverid);
+      }
+
+      Messages.rows[i]["imgurl"] =  User.rows[0].imageurl;
+      Messages.rows[i]["name"] = User.rows[0].firstname + ' ' + User.rows[0].lastname;
+    }
+
     var Replies = await messageReplyDataModel.getSelectedMessage(req.body.id);
     for (let i = 0; i < Replies.rows.length; i ++) {
       var User = await userDataModel.load(Replies.rows[i].senderid);
@@ -70,6 +83,21 @@ exports.getMessages =  async (req, res, next) => {
 
  exports.addReply = async (req, res, next) => {
   if (req.session.u_id) {
+    var u_id = req.session.u_id;
+    var Messages = await messageDataModel.gelAll(u_id);
+
+    for (let i = 0; i < Messages.rows.length; i ++) {
+      var User;
+      if (Messages.rows[i].senderid != u_id) {
+        User = await userDataModel.load(Messages.rows[i].senderid);
+      }
+      else {
+        User = await userDataModel.load(Messages.rows[i].recieverid);
+      }
+
+      Messages.rows[i]["imgurl"] =  User.rows[0].imageurl;
+      Messages.rows[i]["name"] = User.rows[0].firstname + ' ' + User.rows[0].lastname;
+    }
 
     if (req.body.reply === "" || req.body.reply == null) {
       res.render("messages", {
@@ -78,7 +106,7 @@ exports.getMessages =  async (req, res, next) => {
       });
       return;
     }
-    let senderId = req.session.u_id;
+    let senderId = u_id;
     let reply = req.body.reply;
     let msgId = req.body.id;
     let rcvrId;
