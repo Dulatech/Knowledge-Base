@@ -28,7 +28,7 @@ exports.loadHome = async (req, res, next) => {
                 msgnum: Msgs.rows[0],
                 truePrev: false,
                 selectedtopic: "All",
-                trueNext: true,
+                trueNext: false,
                 trueHomeCSS: true
             });
             } else {
@@ -39,7 +39,7 @@ exports.loadHome = async (req, res, next) => {
                     msgnum: Msgs.rows[0],
                     truePrev: false,
                     selectedtopic: "All",
-                    trueNext: false,
+                    trueNext: true,
                     trueHomeCSS: true
                 });
             }
